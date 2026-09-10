@@ -1,0 +1,7 @@
+# Documentação EnCteX — dependências de build.
+#
+# Instale com:  pip install -r requirements.txt
+# Sirva local:  mkdocs serve
+# Gere o site:  mkdocs build   (saída em site/)
+
+mkdocs-material>=9.5

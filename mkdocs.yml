@@ -1,0 +1,239 @@
+site_name: EnCteX Docs
+site_description: >-
+  Manuais e formulações dos programas de fundações da EnCteX —
+  SPO, SPX, SPX AI, PCO e PCX.
+site_url: https://docs.enctex.com.br/
+copyright: © EnCteX — Ciência computacional aplicada à engenharia civil
+
+# A documentação vive num subdomínio e o site institucional continua onde está.
+# O link de volta é o que costura os dois.
+extra:
+  social:
+    - icon: material/web
+      link: https://enctex.com.br
+      name: enctex.com.br
+  generator: false
+  # O botao do cabecalho, no estilo do site. Ver overrides/partials/header.html.
+  site_cta:
+    texto: "Fale conosco →"
+    link: https://enctex.com.br/contato
+
+theme:
+  name: material
+  custom_dir: overrides
+  language: pt-BR
+  favicon: assets/favicon.png
+  logo: assets/logo.png
+  font:
+    # As mesmas do enctex.com.br: Space Grotesk nos títulos, Inter no corpo.
+    text: Inter
+    code: JetBrains Mono
+  features:
+    - navigation.tabs          # um produto por aba no topo
+    - navigation.sections
+    - navigation.top
+    # navigation.instant fica FORA de proposito: com ele o seletor de idioma
+    # perde o link contextual e a troca leva sempre para a pagina inicial,
+    # em vez da mesma pagina no outro idioma.
+    - navigation.tracking
+    - navigation.indexes
+    - toc.follow
+    - search.suggest
+    - search.highlight
+    - search.share
+    - content.code.copy
+    - content.tooltips
+  palette:
+    # Escuro e ponto. O site institucional e escuro, e oferecer alternancia
+    # aqui faria a documentacao ser a unica peca da marca com dois rostos.
+    scheme: slate
+    primary: custom
+    accent: custom
+
+markdown_extensions:
+  - abbr
+  - admonition
+  - attr_list
+  - def_list
+  - footnotes
+  - md_in_html
+  - tables
+  - toc:
+      permalink: true
+      permalink_title: Link para esta seção
+  - pymdownx.arithmatex:       # fórmulas em LaTeX
+      generic: true
+  - pymdownx.betterem
+  - pymdownx.caret
+  - pymdownx.details
+  # Os ícones `:material-...:` dos cartões. Sem esta extensão eles saem como
+  # texto literal no meio do cartão.
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.inlinehilite
+  - pymdownx.keys
+  - pymdownx.snippets
+  - pymdownx.superfences
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.tilde
+
+extra_javascript:
+  - javascripts/mathjax.js
+  - https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js
+
+extra_css:
+  - stylesheets/extra.css
+
+plugins:
+  - search:
+      lang:
+        - pt
+        - en
+        - es
+  # -- português, inglês e espanhol -----------------------------------------
+  #
+  # O seletor de idioma do cabeçalho vem daqui: o plugin publica um site por
+  # idioma (/, /en/, /es/) e o Material desenha a troca.
+  #
+  # `fallback_to_default` é o que torna a tradução INCREMENTAL: uma página sem
+  # versão traduzida é servida em português, em vez de virar 404. Sem isso, o
+  # site em inglês nasceria quebrado até a última página ser traduzida.
+  #
+  # Para traduzir uma página, crie o arquivo irmão com o sufixo do idioma:
+  #   docs/spx/index.md      -> português (padrão)
+  #   docs/spx/index.en.md   -> inglês
+  #   docs/spx/index.es.md   -> espanhol
+  - i18n:
+      docs_structure: suffix
+      fallback_to_default: true
+      languages:
+        - locale: pt
+          name: Português
+          default: true
+          build: true
+        - locale: en
+          name: English
+          build: true
+          nav_translations:
+            Início: Home
+            Começar: Getting started
+            Instalação: Installation
+            Licenciamento: Licensing
+            Convenções e unidades: Conventions and units
+            Normas atendidas: Standards
+            Manual: Manual
+            Formulações: Formulations
+            Interface: Interface
+            Configuração do bloco: Pile cap setup
+            Sondagem e solos: Boreholes and soils
+            Resultado geotécnico: Geotechnical results
+            Análise estrutural: Structural analysis
+            Dimensionamento: Design
+            Detalhamento em DXF: DXF detailing
+            Detalhamento: Detailing
+            Relatório: Report
+            Capacidade de carga: Bearing capacity
+            Recalque: Settlement
+            Reação do solo (Kh e Kv): Soil reaction (Kh and Kv)
+            Tabelas de parâmetros: Parameter tables
+            Referências: References
+            O que muda no SPO: What changes in SPO
+            Recursos de IA: AI features
+            Blévot & Frémy: Blévot & Frémy
+            MBT (Bielas e Tirantes): STM (Strut and Tie)
+            Elementos finitos: Finite elements
+            Combinação de ações: Load combinations
+            Verificações: Checks
+            Blocos flexíveis: Flexible pile caps
+        - locale: es
+          name: Español
+          build: true
+          nav_translations:
+            Início: Inicio
+            Começar: Empezar
+            Instalação: Instalación
+            Licenciamento: Licencias
+            Convenções e unidades: Convenciones y unidades
+            Normas atendidas: Normas
+            Manual: Manual
+            Formulações: Formulaciones
+            Interface: Interfaz
+            Configuração do bloco: Configuración del encepado
+            Sondagem e solos: Sondeos y suelos
+            Resultado geotécnico: Resultado geotécnico
+            Análise estrutural: Análisis estructural
+            Dimensionamento: Dimensionamiento
+            Detalhamento em DXF: Detallado en DXF
+            Detalhamento: Detallado
+            Relatório: Informe
+            Capacidade de carga: Capacidad de carga
+            Recalque: Asentamiento
+            Reação do solo (Kh e Kv): Reacción del suelo (Kh y Kv)
+            Tabelas de parâmetros: Tablas de parámetros
+            Referências: Referencias
+            O que muda no SPO: Qué cambia en SPO
+            Recursos de IA: Funciones de IA
+            Blévot & Frémy: Blévot & Frémy
+            MBT (Bielas e Tirantes): MBT (Bielas y Tirantes)
+            Elementos finitos: Elementos finitos
+            Combinação de ações: Combinación de acciones
+            Verificações: Comprobaciones
+            Blocos flexíveis: Encepados flexibles
+
+nav:
+  - Início: index.md
+  - Começar:
+      - comecar/index.md
+      - Instalação: comecar/instalacao.md
+      - Licenciamento: comecar/licenciamento.md
+      - Convenções e unidades: comecar/convencoes.md
+      - Normas atendidas: comecar/normas.md
+  - SPO:
+      - spo/index.md
+      - O que muda no SPO: spo/diferencas.md
+  - SPX:
+      - spx/index.md
+      - Manual:
+          - Interface: spx/manual/interface.md
+          - Configuração do bloco: spx/manual/bloco.md
+          - Sondagem e solos: spx/manual/sondagem.md
+          - Resultado geotécnico: spx/manual/resultado-geotecnico.md
+          - Análise estrutural: spx/manual/analise-estrutural.md
+          - Dimensionamento: spx/manual/dimensionamento.md
+          - Detalhamento em DXF: spx/manual/detalhamento.md
+          - Relatório: spx/manual/relatorio.md
+      - Formulações:
+          - spx/formulacoes/index.md
+          - Capacidade de carga: spx/formulacoes/capacidade-de-carga.md
+          - Recalque: spx/formulacoes/recalque.md
+          - Reação do solo (Kh e Kv): spx/formulacoes/reacao-do-solo.md
+          - Análise estrutural: spx/formulacoes/analise-estrutural.md
+          - Dimensionamento: spx/formulacoes/dimensionamento.md
+          - Tabelas de parâmetros: spx/formulacoes/tabelas.md
+      - Referências: spx/referencias.md
+  - SPX AI:
+      - spx-ai/index.md
+      - Recursos de IA: spx-ai/recursos-ia.md
+  - PCO:
+      - pco/index.md
+      - Manual:
+          - Interface: pco/manual/interface.md
+          - Configuração do bloco: pco/manual/bloco.md
+          - Dimensionamento: pco/manual/dimensionamento.md
+          - Detalhamento: pco/manual/detalhamento.md
+          - Relatório: pco/manual/relatorio.md
+      - Formulações:
+          - pco/formulacoes/index.md
+          - Blévot & Frémy: pco/formulacoes/blevot.md
+          - MBT (Bielas e Tirantes): pco/formulacoes/mbt.md
+          - Elementos finitos: pco/formulacoes/elementos-finitos.md
+          - Combinação de ações: pco/formulacoes/combinacoes.md
+          - Verificações: pco/formulacoes/verificacoes.md
+      - Referências: pco/referencias.md
+  - PCX:
+      - pcx/index.md
+      - Blocos flexíveis: pcx/blocos-flexiveis.md

@@ -1,0 +1,585 @@
+/* Documentação EnCteX — identidade do enctex.com.br sobre o tema Material.
+ *
+ * As cores e as fontes não foram escolhidas aqui: foram lidas do site, das
+ * variáveis que ele já publica (--background, --primary, --brand-teal…). Quem
+ * sai da página institucional para a documentação não deve sentir que trocou
+ * de empresa.
+ */
+
+@import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Sora:wght@500;600;700&display=swap");
+
+:root {
+  /* Tokens do site, resolvidos para sRGB. */
+  --ex-fundo: #011014;
+  --ex-superficie: #03171c;
+  --ex-superficie-2: #06292f;
+  --ex-borda: #1a2c30;
+  --ex-texto: #ecf3f4;
+  --ex-texto-fraco: #7e9498;
+  --ex-primaria: #3fc0c0;   /* ciano claro: links e destaques */
+  --ex-teal: #1e9b82;       /* teal da marca */
+  --ex-azul: #0079ba;       /* azul da marca */
+  --ex-profundo: #003649;
+  --ex-raio: 0.375rem;      /* --radius do site */
+
+  --ex-titulo: "Space Grotesk", "Inter", system-ui, sans-serif;
+  /* A palavra da marca usa outra fonte que os titulos: Sora. */
+  --ex-marca: "Sora", "Inter", system-ui, sans-serif;
+  --ex-gradiente: linear-gradient(135deg, #1e9b82 0%, #0079ba 100%);
+}
+
+/* -- tema escuro, que é o padrão ------------------------------------------- */
+[data-md-color-scheme="slate"] {
+  --md-hue: 195;
+
+  --md-default-bg-color: var(--ex-fundo);
+  --md-default-bg-color--light: var(--ex-superficie);
+  --md-default-bg-color--lighter: var(--ex-superficie-2);
+
+  --md-default-fg-color: var(--ex-texto);
+  --md-default-fg-color--light: var(--ex-texto-fraco);
+  --md-default-fg-color--lighter: var(--ex-borda);
+  --md-default-fg-color--lightest: #0d2026;
+
+  --md-primary-fg-color: var(--ex-fundo);
+  --md-primary-fg-color--dark: #000a0d;
+  --md-primary-bg-color: var(--ex-texto);
+
+  --md-accent-fg-color: var(--ex-primaria);
+
+  --md-typeset-color: var(--ex-texto);
+  --md-typeset-a-color: var(--ex-primaria);
+  --md-code-bg-color: var(--ex-superficie);
+  --md-code-fg-color: #cfe6e8;
+
+  --md-footer-bg-color: #000a0d;
+  --md-footer-bg-color--dark: #000a0d;
+}
+
+/* -- a barra superior ------------------------------------------------------
+ *
+ * No site ela é quase preta com uma borda fina embaixo, e não um bloco de cor
+ * saturada. O Material pinta a barra com a cor primária; aqui a primária É o
+ * fundo, e a separação vem da borda.
+ */
+[data-md-color-scheme="slate"] .md-header {
+  border-bottom: 1px solid var(--ex-borda);
+  box-shadow: none;
+}
+
+.md-header__title {
+  font-family: var(--ex-titulo);
+  font-weight: 600;
+}
+
+/* -- títulos ---------------------------------------------------------------
+ *
+ * Space Grotesk, com o peso alto e o entrelinhamento curto da página inicial.
+ */
+.md-typeset h1,
+.md-typeset h2,
+.md-typeset h3,
+.md-typeset h4,
+.md-typeset h5 {
+  font-family: var(--ex-titulo);
+  font-weight: 700;
+  /* Os tres numeros medidos no h1 do enctex.com.br: peso 700, entrelinha
+     1,02 do corpo e tracking de -0,025em. E o aperto que da o bloco solido
+     do titulo da pagina inicial. */
+  letter-spacing: -0.025em;
+  color: var(--md-default-fg-color);
+}
+
+.md-typeset h1 {
+  line-height: 1.02;
+  margin-bottom: 0.6em;
+}
+
+.md-typeset h2 {
+  line-height: 1.08;
+  margin-top: 2em;
+}
+
+.md-typeset h3,
+.md-typeset h4 {
+  line-height: 1.2;
+}
+
+.md-nav__title,
+.md-tabs__link {
+  font-family: var(--ex-titulo);
+}
+
+/* -- superfícies -----------------------------------------------------------
+ *
+ * O site usa cartões de fundo levemente mais claro que o fundo, borda de 1 px
+ * e raio pequeno. Vale para cartão, tabela, admonition e bloco de código.
+ */
+.md-typeset .admonition,
+.md-typeset details,
+.md-typeset .grid.cards > ul > li,
+.md-typeset pre > code,
+.md-typeset table:not([class]) {
+  border-radius: var(--ex-raio);
+}
+
+[data-md-color-scheme="slate"] .md-typeset .grid.cards > ul > li {
+  background: var(--ex-superficie);
+  border: 1px solid var(--ex-borda);
+}
+
+[data-md-color-scheme="slate"] .md-typeset .grid.cards > ul > li:hover {
+  border-color: var(--ex-teal);
+  box-shadow: 0 0 0 1px rgba(30, 155, 130, 0.25);
+}
+
+[data-md-color-scheme="slate"] .md-typeset table:not([class]) {
+  background: var(--ex-superficie);
+  border: 1px solid var(--ex-borda);
+}
+
+[data-md-color-scheme="slate"] .md-typeset table:not([class]) th {
+  background: var(--ex-superficie-2);
+  font-family: var(--ex-titulo);
+  font-weight: 600;
+}
+
+/* -- tabelas de parâmetros -------------------------------------------------
+ *
+ * O alinhamento à direita das colunas numéricas vem da PRÓPRIA tabela, pela
+ * linha separadora do Markdown (`--:`), e não daqui. Uma regra global jogava
+ * texto corrido para a direita nas dezenas de tabelas que são só descrição.
+ */
+.md-typeset table:not([class]) {
+  font-size: 0.72rem;
+}
+
+.md-typeset .md-typeset__table {
+  overflow-x: auto;
+}
+
+/* -- fórmulas --------------------------------------------------------------
+ *
+ * Fórmula em bloco rola sozinha quando não cabe: sem isto, uma equação larga
+ * empurra a página inteira para o lado no celular.
+ */
+.md-typeset .arithmatex {
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding: 0.2rem 0;
+}
+
+/* -- a nota de validade ----------------------------------------------------
+ *
+ * Todo método empírico tem faixa de aplicação. Ela ganha cor própria porque é
+ * a informação que separa usar de usar errado.
+ *
+ * A classe vem do cabeçalho do bloco -- `!!! warning validade "Título"` --,
+ * que é como o Python-Markdown declara classe extra em admonition.
+ */
+.md-typeset .admonition.validade,
+.md-typeset details.validade {
+  border-color: #d08a1a;
+}
+
+.md-typeset .validade > .admonition-title,
+.md-typeset .validade > summary {
+  background-color: rgba(208, 138, 26, 0.12);
+}
+
+.md-typeset .validade > .admonition-title::before,
+.md-typeset .validade > summary::before {
+  background-color: #d08a1a;
+  -webkit-mask-image: var(--md-admonition-icon--warning);
+          mask-image: var(--md-admonition-icon--warning);
+}
+
+/* -- fluxo de etapas -------------------------------------------------------
+ *
+ * Os fluxogramas eram Mermaid. O Material traz Mermaid embutido, mas na versão
+ * instalada ele troca o <pre> por um <div> vazio e nunca insere o SVG -- sem
+ * erro no console, o que torna a falha invisível até alguém olhar a página.
+ *
+ * Num site que vai para produção, um diagrama que depende de JS para existir é
+ * um diagrama que pode não existir. Estes são feitos de HTML e CSS: renderizam
+ * sempre, acompanham o tema claro/escuro e quebram a linha sozinhos no celular,
+ * que é mais do que o SVG de largura fixa entregava.
+ */
+.md-typeset .fluxo {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: stretch;
+  gap: 0.35rem;
+  margin: 1.2em 0;
+}
+
+.md-typeset .fluxo > .etapa {
+  flex: 1 1 auto;
+  min-width: 5.2rem;
+  padding: 0.45rem 0.6rem;
+  border: 1px solid var(--md-default-fg-color--lighter);
+  border-left: 3px solid var(--ex-teal);
+  border-radius: var(--ex-raio);
+  background: var(--md-code-bg-color);
+  font-size: 0.7rem;
+  line-height: 1.35;
+}
+
+.md-typeset .fluxo > .etapa .n {
+  display: block;
+  font-family: var(--ex-titulo);
+  font-size: 0.62rem;
+  font-weight: 700;
+  color: var(--ex-primaria);
+  letter-spacing: 0.06em;
+}
+
+.md-typeset .fluxo > .seta {
+  align-self: center;
+  color: var(--md-default-fg-color--light);
+  font-size: 0.9rem;
+  line-height: 1;
+}
+
+.md-typeset .fluxo > .etapa.ramo {
+  border-left-color: var(--ex-azul);
+}
+
+/* -- cadeia de dependência -------------------------------------------------
+ *
+ * Mesma ideia, em coluna: cada nível consome o anterior.
+ */
+.md-typeset .cadeia {
+  margin: 1.2em 0;
+  border-left: 2px solid var(--md-default-fg-color--lighter);
+  padding-left: 0.9rem;
+}
+
+.md-typeset .cadeia > .nivel {
+  position: relative;
+  margin: 0 0 0.7rem;
+  padding: 0.5rem 0.7rem;
+  border: 1px solid var(--md-default-fg-color--lighter);
+  border-radius: var(--ex-raio);
+  background: var(--md-code-bg-color);
+  font-size: 0.72rem;
+}
+
+.md-typeset .cadeia > .nivel::before {
+  content: "";
+  position: absolute;
+  left: -0.95rem;
+  top: 1rem;
+  width: 0.7rem;
+  height: 2px;
+  background: var(--md-default-fg-color--lighter);
+}
+
+.md-typeset .cadeia > .nivel strong {
+  font-family: var(--ex-titulo);
+  color: var(--ex-primaria);
+}
+
+.md-typeset .cadeia > .nivel .consome {
+  display: block;
+  margin-top: 0.15rem;
+  color: var(--md-default-fg-color--light);
+  font-size: 0.66rem;
+}
+
+/* -- quadro de limites do projeto ------------------------------------------
+ *
+ * Os números que definem o porte de projeto que cada programa comporta. Ficam
+ * em destaque porque são a primeira pergunta de quem avalia a compra.
+ */
+.md-typeset .limites {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: 1.2em 0;
+}
+
+.md-typeset .limites > .limite {
+  flex: 1 1 7rem;
+  padding: 0.6rem 0.7rem;
+  border: 1px solid var(--md-default-fg-color--lighter);
+  border-radius: var(--ex-raio);
+  background: var(--md-code-bg-color);
+  text-align: center;
+}
+
+.md-typeset .limites > .limite .valor {
+  display: block;
+  font-family: var(--ex-titulo);
+  font-size: 1.25rem;
+  font-weight: 700;
+  line-height: 1.1;
+  color: var(--ex-primaria);
+}
+
+.md-typeset .limites > .limite .rotulo {
+  display: block;
+  margin-top: 0.15rem;
+  color: var(--md-default-fg-color--light);
+  font-size: 0.62rem;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+}
+
+/* -- barra de abas ---------------------------------------------------------
+ *
+ * No site, o item de menu inativo é cinza-azulado e o ativo é branco. O
+ * Material entrega 0,7 de opacidade para o inativo, o que sobre fundo quase
+ * preto fica no limite da legibilidade -- em tela de notebook, some.
+ */
+[data-md-color-scheme="slate"] .md-tabs__link {
+  opacity: 1;
+  color: var(--ex-texto-fraco);
+  transition: color 0.2s;
+}
+
+[data-md-color-scheme="slate"] .md-tabs__link:hover,
+[data-md-color-scheme="slate"] .md-tabs__link--active {
+  color: var(--ex-texto);
+}
+
+[data-md-color-scheme="slate"] .md-tabs__item--active .md-tabs__link {
+  color: var(--ex-primaria);
+}
+
+/* O logotipo tem fundo transparente; sobre a barra escura ele aparece inteiro. */
+.md-header__button.md-logo img,
+.md-header__button.md-logo svg {
+  height: 1.4rem;
+  width: auto;
+}
+
+/* -- a barra do cabeçalho --------------------------------------------------
+ *
+ * Todas as medidas abaixo foram LIDAS da barra do enctex.com.br, não
+ * estimadas: 56 px de altura, 24 px de recuo lateral, borda de 0,8 px em
+ * branco a 10 %, fundo escuro a 40 % e cantos totalmente arredondados.
+ *
+ * A versão anterior tinha a proporção errada -- barra baixa demais, marca
+ * pequena demais -- porque eu havia escolhido os valores em vez de medi-los.
+ */
+.md-header {
+  background: transparent;
+  box-shadow: none;
+  border-bottom: none;
+}
+
+.md-header__inner {
+  align-items: center;
+  gap: 0;
+  height: 56px;
+  margin-top: 0.6rem;
+  padding: 0 24px;
+  border: 0.8px solid rgba(255, 255, 255, 0.1);
+  border-radius: 9999px;
+  background: rgba(10, 31, 36, 0.55);
+  backdrop-filter: blur(12px);
+}
+
+/* -- a marca ---------------------------------------------------------------
+ *
+ * 28 x 28, como no site. O glifo vem recortado sem a moldura do arquivo
+ * original e o quadradinho branco é feito aqui -- um arredondamento só, e
+ * folga igual nos quatro lados.
+ */
+.md-header__button.md-logo {
+  margin: 0;
+  padding: 0;
+}
+
+.md-header__button.md-logo img {
+  height: 28px;
+  width: 28px;
+  padding: 3px;
+  border-radius: 6px;
+  background: #ffffff;
+  object-fit: contain;
+}
+
+/* -- o nome ----------------------------------------------------------------
+ *
+ * Sora 600 de 16 px, tracking -0,4 px, pintada com o gradiente da marca
+ * (teal -> azul) recortado no texto. É por isso que a cor não é uma cor: no
+ * site ela também não é, e usar o ciano sólido deixava a palavra visivelmente
+ * diferente da do cabeçalho institucional.
+ *
+ * O Material empilha DOIS rótulos aqui, ambos absolutos, e troca um pelo
+ * outro conforme a rolagem. Absoluto não ocupa espaço, e a caixa nascia com
+ * largura zero. Aqui só o nome do site importa -- o título da página já está
+ * no H1 e na aba do navegador --, então o primeiro volta ao fluxo e o segundo
+ * sai.
+ */
+.md-header__title {
+  /* O Material dá altura fixa e entrelinha própria a esta caixa, pensando no
+     rótulo absoluto que ela normalmente abriga. Com o rótulo de volta ao
+     fluxo, essa altura deixava o nome acima do centro da barra --
+     desalinhado do menu e da marca. Flex resolve sem depender de números. */
+  display: flex;
+  align-items: center;
+  flex: 0 0 auto;
+  height: 100%;
+  margin: 0 0 0 12px;
+  line-height: 1.2;
+}
+
+/* A caixa interna do Material estica para a altura toda e encosta o rótulo no
+   topo dela -- por isso o nome ficava acima do centro mesmo com o pai
+   centrado. Centrar cada nível resolve. */
+.md-header__ellipsis {
+  display: flex;
+  align-items: center;
+  height: 100%;
+}
+
+.md-header__ellipsis,
+.md-header__title .md-header__topic:first-child {
+  position: static;
+  opacity: 1;
+  transform: none;
+}
+
+.md-header__title .md-header__topic:first-child {
+  align-items: center;
+}
+
+.md-header__title .md-header__topic:first-child .md-ellipsis {
+  font-family: var(--ex-marca);
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: -0.4px;
+  white-space: nowrap;
+
+  background: var(--ex-gradiente);
+  -webkit-background-clip: text;
+          background-clip: text;
+  color: transparent;
+}
+
+.md-header__topic[data-md-component="header-topic"] {
+  display: none;
+}
+
+/* -- o menu de produtos, dentro da barra -----------------------------------
+ *
+ * Inter 500 de 13 px com 8/10 de padding, cinza-azulado no inativo e branco
+ * no ativo -- as medidas do menu do site.
+ */
+.md-header__inner .ex-tabs {
+  display: flex;
+  align-items: center;
+  flex: 1 1 auto;
+  min-width: 0;
+  height: 100%;
+  overflow-x: auto;
+  border: none;
+  background: transparent;
+  box-shadow: none;
+  scrollbar-width: none;
+}
+
+.md-header__inner .ex-tabs::-webkit-scrollbar {
+  display: none;
+}
+
+.md-header__inner .ex-tabs .md-tabs__list {
+  display: flex;
+  /* Sem largura total, a lista encolhe para o tamanho dos itens e o
+     alinhamento não tem espaço onde acontecer: o menu colava no nome. */
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+  white-space: nowrap;
+}
+
+.md-header__inner .ex-tabs .md-tabs__item {
+  height: auto;
+  padding: 0;
+}
+
+.md-header__inner .ex-tabs .md-tabs__link {
+  margin: 0;
+  padding: 8px 10px;
+  opacity: 1;
+  font-family: "Inter", system-ui, sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 1.2;
+  color: var(--ex-texto-fraco);
+  transition: color 0.2s;
+}
+
+.md-header__inner .ex-tabs .md-tabs__link:hover {
+  color: var(--ex-texto);
+}
+
+.md-header__inner .ex-tabs .md-tabs__item--active .md-tabs__link {
+  color: var(--ex-texto);
+  font-weight: 600;
+}
+
+/* -- a busca ---------------------------------------------------------------
+ *
+ * O Material dá à busca um campo largo com fundo próprio, que dentro de uma
+ * barra em pílula vira um retângulo atravessado no meio dela. Aqui ela fica
+ * discreta, na altura da barra.
+ */
+.md-header__inner .md-search__form {
+  height: 32px;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.md-header__inner .md-search__form:hover {
+  background: rgba(255, 255, 255, 0.09);
+}
+
+.md-header__inner .md-search__input {
+  font-size: 13px;
+}
+
+.md-header__inner .md-search__input::placeholder {
+  color: var(--ex-texto-fraco);
+}
+
+/* -- o botão de contato ----------------------------------------------------
+ *
+ * Inter 500 de 13 px, borda de 1 px em teal escuro, raio de 2 px e 6/12 de
+ * padding -- as medidas do "Fale Conosco" do site.
+ */
+.ex-cta {
+  flex-shrink: 0;
+  margin-left: 12px;
+  padding: 6px 12px;
+  border: 1px solid #194d4d;
+  border-radius: 2px;
+  color: var(--ex-primaria);
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 1.2;
+  white-space: nowrap;
+  transition: background-color 0.2s, border-color 0.2s;
+}
+
+.ex-cta:hover {
+  border-color: var(--ex-primaria);
+  background: rgba(63, 192, 192, 0.1);
+}
+
+/* -- tela estreita ---------------------------------------------------------
+ *
+ * Abaixo do ponto em que o Material troca o menu por gaveta, as abas e o botão
+ * saem da barra: espremê-los ali só produziria uma fileira ilegível.
+ */
+@media screen and (max-width: 76.234375em) {
+  .md-header__inner .ex-tabs,
+  .ex-cta {
+    display: none;
+  }
+}

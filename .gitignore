@@ -1,0 +1,17 @@
+# Saída do build. É gerada por `mkdocs build` a partir de docs/ e mkdocs.yml,
+# e versioná-la só produziria diffs enormes e conflitos em cada publicação.
+/site/
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# Editores e sistema
+.vscode/
+.idea/
+*.swp
+Thumbs.db
+desktop.ini
+.DS_Store
