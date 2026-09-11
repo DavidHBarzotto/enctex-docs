@@ -71,6 +71,24 @@ que faixa ela vale.
 
     [:octicons-arrow-right-24: Documentação do PCX](pcx/index.md)
 
+-   :material-format-align-bottom:{ .lg .middle } **SBO** · gratuito
+
+    ---
+
+    **Simple Beam One** — vigas de concreto armado à flexão, cortante e
+    torção, em seção retangular e T, com diagrama momento-curvatura.
+
+    [:octicons-arrow-right-24: Documentação do SBO](sbo/index.md)
+
+-   :material-tune-variant:{ .lg .middle } **SBX** · gratuito
+
+    ---
+
+    **Simple Beam X** — o SBO com **otimização da seção**: encontra a
+    geometria de menor custo que atende aos esforços.
+
+    [:octicons-arrow-right-24: Documentação do SBX](sbx/index.md)
+
 </div>
 
 ## Por onde começar

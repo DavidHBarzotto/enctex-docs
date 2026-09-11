@@ -143,6 +143,10 @@ plugins:
             Referências: References
             O que muda no SPO: What changes in SPO
             Recursos de IA: AI features
+            Flexão simples: Simple bending
+            Cortante e torção: Shear and torsion
+            Momento-curvatura: Moment-curvature
+            Otimização da seção: Section optimisation
             Blévot & Frémy: Blévot & Frémy
             Fórmulas por arranjo: Fórmulas por disposición
             Fórmulas por arranjo: Formulas by arrangement
@@ -240,3 +244,14 @@ nav:
   - PCX:
       - pcx/index.md
       - Blocos flexíveis: pcx/blocos-flexiveis.md
+  - SBO:
+      - sbo/index.md
+      - Formulações:
+          - sbo/formulacoes/index.md
+          - Flexão simples: sbo/formulacoes/flexao.md
+          - Cortante e torção: sbo/formulacoes/cortante-torcao.md
+          - Momento-curvatura: sbo/formulacoes/momento-curvatura.md
+      - Referências: sbo/referencias.md
+  - SBX:
+      - sbx/index.md
+      - Otimização da seção: sbx/otimizacao.md

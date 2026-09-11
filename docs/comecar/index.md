@@ -51,6 +51,13 @@ de escolher:
 | PCO | Pile Cap One | 1.0.0 | Blocos rígidos por bielas e tirantes |
 | PCX | Pile Cap X | 1.0.0 | Blocos flexíveis, calculados como viga bi-apoiada ou engastada |
 
+**Linha SB — Simple Beam: vigas (gratuitos)**
+
+| Programa | Nome completo | Versão | Acrescenta |
+| :-- | :-- | :-- | :-- |
+| SBO | Simple Beam One | 1.0 | Flexão, cortante, torção e momento-curvatura, em seção retangular e T |
+| SBX | Simple Beam X | 1.0 | Otimização da seção: a geometria de menor custo que atende aos esforços |
+
 Cada linha é cumulativa: o SPX faz tudo o que o SPO faz, e o SPX AI faz tudo o
 que o SPX faz. O mesmo vale para PCO e PCX, que compartilham o núcleo de
 cálculo — o PCX é o PCO com os blocos flexíveis habilitados.
