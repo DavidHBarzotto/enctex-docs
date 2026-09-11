@@ -2,6 +2,10 @@
 #
 # Instale com:  pip install -r requirements.txt
 # Sirva local:  mkdocs serve
-# Gere o site:  mkdocs build   (saída em site/)
+# Gere o site:  mkdocs build --strict   (saída em site/)
 
 mkdocs-material>=9.5
+
+# Publica um site por idioma (/, /en/, /es/) e desenha o seletor do cabeçalho.
+# Sem ele o build falha, porque o mkdocs.yml declara o plugin `i18n`.
+mkdocs-static-i18n>=1.2
