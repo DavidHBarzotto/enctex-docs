@@ -67,11 +67,12 @@ leitor de PDF não se aplica.
 !!! warning "É aqui que o tempo vai"
 
     Uma obra com quinze furos de vinte metros são trezentas linhas a digitar,
-    cada uma com um \(N_{SPT}\) e um código de solo — e cada uma é uma chance
-    de trocar `12` por `21`, o que muda \(K\) de 800 para 550 kPa.
+    cada uma com um \(N_{SPT}\) e uma classificação de solo — e cada uma é uma chance
+    de trocar **areia siltosa** por **silte arenoso**, o que muda \(K\) de
+    0,80 para 0,55 MPa.
 
     Se o volume de boletins é grande, o leitor de PDF do SPX é o recurso que
-    mais devolve tempo. Ver [convenções](../comecar/convencoes.md#codigos-de-solo).
+    mais devolve tempo. Ver [convenções](../comecar/convencoes.md#tipos-de-solo).
 
 ## O que é idêntico
 

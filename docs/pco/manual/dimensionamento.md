@@ -95,11 +95,6 @@ real.
 
 ## Mensagens
 
-??? question "\"A simulação MEF modela apenas compressão — use Blévot ou MBT (analítico)\""
-
-    O modelo em elementos finitos representa o bloco comprimido. Para bloco em
-    **arrancamento/tração**, o dimensionamento sai dos métodos analíticos.
-
 ??? question "Tensão no nó acima do limite"
 
     O concreto está esmagando. Armadura não resolve: aumente a altura do bloco,

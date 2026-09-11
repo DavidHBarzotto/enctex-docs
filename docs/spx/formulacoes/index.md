@@ -45,8 +45,8 @@ Os módulos não são independentes: cada um consome o anterior.
     <span class="consome">consome: dimensionamento e recalque</span></div>
 </div>
 
-Uma consequência prática: **mudar a sondagem muda tudo**. O código de solo
-seleciona \(K\), \(\alpha\), \(C\) e \(m\), que por sua vez definem capacidade,
+Uma consequência prática: **mudar a sondagem muda tudo**. A classificação do
+solo seleciona \(K\), \(\alpha\), \(C\) e \(m\), que por sua vez definem capacidade,
 recalque, rigidez das molas, esforços e armadura. Não há como alterar o perfil
 e aproveitar um dimensionamento anterior.
 

@@ -5,41 +5,35 @@ Abas 2 e 3. Aqui entra o perfil do subsolo — o dado que governa todo o resto.
 ## Sondagem / NSPT
 
 A sondagem é lançada **metro a metro**: para cada profundidade, um valor de
-\(N_{SPT}\) e um código de solo.
+\(N_{SPT}\) e uma classificação de solo.
 
 | Coluna | Conteúdo |
 | :-- | :-- |
 | Profundidade | 1 m, 2 m, 3 m… |
 | \(N_{SPT}\) | Número de golpes |
-| Código de solo | Numérico, posicional — ver abaixo |
+| Tipo de solo | Classificação por frações — ver abaixo |
 
-### Códigos de solo
+### Tipos de solo
 
-O tipo é identificado por número, não por texto. O primeiro dígito é a fração
-dominante (1 areia, 2 silte, 3 argila) e os seguintes são as secundárias, em
-ordem decrescente.
+O solo é classificado pelas frações que o compõem, na ordem em que predominam —
+quinze combinações ao todo:
 
-| Código | Solo | Código | Solo |
-| :-- | :-- | :-- | :-- |
-| 1 | Areia | 3 | Argila |
-| 12 | Areia Siltosa | 31 | Argila Arenosa |
-| 123 | Areia Siltoargilosa | 312 | Argila Arenossiltosa |
-| 13 | Areia Argilosa | 32 | Argila Siltosa |
-| 132 | Areia Argilossiltosa | 321 | Argila Siltoarenosa |
-| 2 | Silte | | |
-| 21 | Silte Arenoso | | |
-| 213 | Silte Arenoargiloso | | |
-| 23 | Silte Argiloso | | |
-| 231 | Silte Argiloarenoso | | |
+| | | |
+| :-- | :-- | :-- |
+| Areia | Silte | Argila |
+| Areia siltosa | Silte arenoso | Argila arenosa |
+| Areia siltoargilosa | Silte arenoargiloso | Argila arenossiltosa |
+| Areia argilosa | Silte argiloso | Argila siltosa |
+| Areia argilossiltosa | Silte argiloarenoso | Argila siltoarenosa |
 
-!!! warning "O código escolhe os parâmetros de cálculo"
+!!! warning "A classificação escolhe os parâmetros de cálculo"
 
-    Não é rótulo. É o código que seleciona \(K\) e \(\alpha\) de Aoki-Velloso,
-    \(C\) de Décourt-Quaresma, \(\alpha_T\) de Teixeira e o fator \(m\) das
-    molas. Trocar `12` por `21` — areia siltosa por silte arenoso — reduz \(K\)
-    de 800 para 550 kPa, **31 % a menos de resistência de ponta**.
+    Não é rótulo. É ela que seleciona \(K\) e \(lpha\) de Aoki-Velloso,
+    \(C\) de Décourt-Quaresma, \(lpha_T\) de Teixeira e o fator \(m\) das
+    molas.
 
-    Confira a classificação do boletim antes de lançar. Ver
+    Trocar **areia siltosa** por **silte arenoso** reduz \(K\) de 0,80 para
+    0,55 MPa, **31 % a menos de resistência de ponta**. Ver
     [Tabelas de parâmetros](../formulacoes/tabelas.md).
 
 ### Múltiplos furos
@@ -55,12 +49,12 @@ e descrição do solo para a tabela. A extração é **editável**: o que sair e
 se corrige antes de calcular.
 
 Numa obra com quinze furos de vinte metros são trezentas linhas a digitar, e
-cada uma é uma chance de trocar `12` por `21`.
+cada uma é uma chance de trocar **areia siltosa** por **silte arenoso**.
 
 !!! warning "Confira a classificação do solo"
 
     Extração automática depende do layout do boletim. Confira sempre a tabela
-    resultante contra o original, com atenção ao **código de solo** — é ele que
+    resultante contra o original, com atenção à **classificação do solo** — é ela que
     seleciona os parâmetros de todos os métodos.
 
 !!! tip "No SPX AI a leitura é inteligente"

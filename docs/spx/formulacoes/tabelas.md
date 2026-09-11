@@ -1,150 +1,203 @@
 # Tabelas de parâmetros
 
-Os coeficientes usados pelos métodos semiempíricos. Todos são selecionados pelo
-[código de solo](../../comecar/convencoes.md#codigos-de-solo) e, quando cabe,
-pelo tipo de estaca.
+Os coeficientes dos métodos semiempíricos, conforme Cintra & Aoki, *Fundações
+por estacas: projeto geotécnico*.
+
+!!! warning "Coeficientes de mesmo nome, significados diferentes"
+
+    \(\alpha\) aparece nos três métodos querendo dizer coisas distintas:
+
+    - Em **Aoki-Velloso** é a razão de atrito \(f_s/q_c\), **adimensional**, em %.
+    - Em **Décourt (1996)** é um fator de correção da ponta, **adimensional**.
+    - Em **Teixeira** é uma tensão, em **kPa**, que multiplica \(N_{SPT}\).
+
+    O mesmo vale para \(\beta\). Não são intercambiáveis.
 
 ---
 
 ## Aoki-Velloso
 
-### Coeficientes K e α
+### Coeficiente K e razão de atrito α
 
-Selecionados pelo código completo do solo.
+Tab. 1.3 — Aoki e Velloso (1975).
 
-| Código | Solo | \(K\) (kPa) | \(\alpha\) |
-| :-- | :-- | --: | --: |
-| 1 | Areia | 1000 | 0,014 |
-| 12 | Areia Siltosa | 800 | 0,020 |
-| 123 | Areia Siltoargilosa | 700 | 0,024 |
-| 13 | Areia Argilosa | 600 | 0,030 |
-| 132 | Areia Argilossiltosa | 500 | 0,028 |
-| 2 | Silte | 400 | 0,030 |
-| 21 | Silte Arenoso | 550 | 0,022 |
-| 213 | Silte Arenoargiloso | 450 | 0,028 |
-| 23 | Silte Argiloso | 230 | 0,034 |
-| 231 | Silte Argiloarenoso | 250 | 0,030 |
-| 3 | Argila | 200 | 0,060 |
-| 31 | Argila Arenosa | 350 | 0,024 |
-| 312 | Argila Arenossiltosa | 300 | 0,028 |
-| 32 | Argila Siltosa | 220 | 0,040 |
-| 321 | Argila Siltoarenosa | 330 | 0,030 |
+| Solo | \(K\) (MPa) | \(\alpha\) (%) |
+| :-- | --: | --: |
+| Areia | 1,00 | 1,4 |
+| Areia siltosa | 0,80 | 2,0 |
+| Areia siltoargilosa | 0,70 | 2,4 |
+| Areia argilosa | 0,60 | 3,0 |
+| Areia argilossiltosa | 0,50 | 2,8 |
+| Silte | 0,40 | 3,0 |
+| Silte arenoso | 0,55 | 2,2 |
+| Silte arenoargiloso | 0,45 | 2,8 |
+| Silte argiloso | 0,23 | 3,4 |
+| Silte argiloarenoso | 0,25 | 3,0 |
+| Argila | 0,20 | 6,0 |
+| Argila arenosa | 0,35 | 2,4 |
+| Argila arenossiltosa | 0,30 | 2,8 |
+| Argila siltosa | 0,22 | 4,0 |
+| Argila siltoarenosa | 0,33 | 3,0 |
 
-!!! note "A relação entre \(K\) e \(\alpha\) é inversa"
+!!! note "A relação entre K e α é inversa"
 
-    Areia limpa tem \(K\) alto (1000 kPa) e \(\alpha\) baixo (1,4 %): resiste
-    muito por ponta e pouco por atrito. Argila é o oposto — \(K\) de 200 kPa e
-    \(\alpha\) de 6 %. É por isso que estaca em argila trabalha por fuste e
-    estaca em areia densa trabalha por ponta.
+    Areia limpa tem \(K\) alto (1,00 MPa) e \(\alpha\) baixo (1,4 %): resiste
+    muito por ponta e pouco por atrito. Argila é o oposto — 0,20 MPa e 6,0 %.
+    É por isso que estaca em argila trabalha por fuste e estaca em areia densa
+    trabalha por ponta.
 
-### Fatores de execução F1 e F2 {: #fatores-de-execucao }
+### Fatores de correção F1 e F2 {: #fatores-de-execucao }
+
+Tab. 1.5 — valores atualizados, adaptados de Aoki e Velloso (1975).
 
 | Tipo de estaca | \(F_1\) | \(F_2\) |
-| :-- | --: | --: |
-| Franki | 2,5 | 5,0 |
-| Pré-moldada | 1,75 | 3,5 |
-| Escavada com fluido | 3,0 | 6,0 |
-| Escavada sem fluido | 3,0 | 6,0 |
-| Raiz | 2,0 | 4,0 |
-| Hélice contínua | 2,0 | 4,0 |
-| Ômega | 2,0 | 4,0 |
+| :-- | :-- | :-- |
+| Franki | 2,50 | \(2F_1\) |
+| Metálica | 1,75 | \(2F_1\) |
+| Pré-moldada | \(1 + D/0{,}80\) | \(2F_1\) |
+| Escavada | 3,0 | \(2F_1\) |
+| Raiz, Hélice contínua e Ômega | 2,0 | \(2F_1\) |
 
 Os fatores são **divisores**: quanto maiores, menor a capacidade. A escala é a
-do efeito da execução sobre o solo — a pré-moldada, cravada, densifica o
-terreno e leva os menores fatores; a escavada, que alivia tensões, leva os
-maiores.
+do efeito da execução sobre o solo — a cravada densifica o terreno e leva os
+menores fatores; a escavada, que alivia tensões, leva os maiores.
 
-Em todos, \(F_2 = 2F_1\).
+!!! info "De onde vieram os valores atualizados"
+
+    A tabela original (1975) trazia apenas Franki 2,50, Metálica 1,75 e
+    Pré-moldada 1,75.
+
+    - **Pré-moldada**: Aoki (1985) constatou que o método era conservador
+      demais para pequenos diâmetros e propôs \(F_1 = 1 + D/0{,}80\), com \(D\)
+      em metros — o diâmetro ou lado da seção do fuste.
+    - **Escavada**: \(F_1 = 3{,}0\) e \(F_2 = 6{,}0\), de Aoki e Alonso (1991).
+    - **Raiz, hélice contínua e ômega**: \(F_1 = 2{,}0\) e \(F_2 = 4{,}0\), de
+      Velloso e Lopes (2002).
 
 ---
 
 ## Décourt-Quaresma
 
-### Coeficiente C
+### Coeficiente característico do solo C
 
-Selecionado pelo código completo do solo.
+Tab. 1.6 — Décourt e Quaresma (1978). Ajustado com 41 provas de carga em
+estacas pré-moldadas de concreto.
 
-| Código | Solo | \(C\) (kPa) |
-| :-- | :-- | --: |
-| 1, 12, 123, 13, 132 | Areias | 400 |
-| 2 | Silte | 225 |
-| 21, 213 | Siltes arenosos | 250 |
-| 23, 231 | Siltes argilosos | 200 |
-| 3, 31, 312, 32, 321 | Argilas | 120 |
+| Tipo de solo | \(C\) (kPa) |
+| :-- | --: |
+| Argila | 120 |
+| Silte argiloso \*  | 200 |
+| Silte arenoso \* | 250 |
+| Areia | 400 |
 
-### Coeficientes α e β
+\* alteração de rocha — solos residuais.
 
-Selecionados pelo **dígito dominante** do solo e pelo tipo de estaca.
+### Fatores α e β de Décourt (1996) {: #fatores-alfa-e-beta }
 
-| Tipo de estaca | Solo | \(\alpha\) | \(\beta\) |
-| :-- | :-- | --: | --: |
-| Escavada com fluido | Areia | 0,85 | 0,90 |
-| Escavada com fluido | Silte | 0,60 | 0,75 |
-| Escavada com fluido | Argila | 0,50 | 0,60 |
-| Escavada sem fluido | Areia | 0,85 | 0,80 |
-| Escavada sem fluido | Silte | 0,60 | 0,65 |
-| Escavada sem fluido | Argila | 0,50 | 0,50 |
-| Hélice contínua | Todos | 0,30 | 1,00 |
-| Raiz | Areia | 0,85 | 1,50 |
-| Raiz | Silte | 0,60 | 1,50 |
-| Raiz | Argila | 0,50 | 1,50 |
-| Pré-moldada | Todos | 1,00 | 1,00 |
-| Franki | Todos | 1,00 | 1,00 |
-| Ômega | Todos | 1,00 | 1,00 |
+Tabs. 1.7 e 1.8. Note que a classificação é em **três famílias** — argilas,
+solos intermediários e areias —, e não pelo código completo de solo.
 
-!!! info "Hélice contínua: ponta penalizada, fuste inteiro"
+**Fator α**, sobre a resistência de ponta:
 
-    O par \(\alpha = 0{,}30\) e \(\beta = 1{,}00\) da hélice contínua é o mais
-    assimétrico da tabela, e traduz a experiência de execução: a limpeza do
-    fundo é ruim (ponta a 30 %), mas o concreto bombeado sob pressão garante
-    aderência plena no fuste.
+| Tipo de solo | Escavada em geral | Escavada (bentonita) | Hélice contínua | Raiz | Injetada sob altas pressões |
+| :-- | --: | --: | --: | --: | --: |
+| Argilas | 0,85 | 0,85 | 0,30 \* | 0,85 \* | 1,00 \* |
+| Solos intermediários | 0,60 | 0,60 | 0,30 \* | 0,60 \* | 1,00 \* |
+| Areias | 0,50 | 0,50 | 0,30 \* | 0,50 \* | 1,00 \* |
+
+**Fator β**, sobre a resistência lateral:
+
+| Tipo de solo | Escavada em geral | Escavada (bentonita) | Hélice contínua | Raiz | Injetada sob altas pressões |
+| :-- | --: | --: | --: | --: | --: |
+| Argilas | 0,80 \* | 0,90 \* | 1,00 \* | 1,50 \* | 3,00 \* |
+| Solos intermediários | 0,65 \* | 0,75 \* | 1,00 \* | 1,50 \* | 3,00 \* |
+| Areias | 0,50 \* | 0,60 \* | 1,00 \* | 1,50 \* | 3,00 \* |
+
+\* valores apenas orientativos, diante do reduzido número de dados disponíveis.
+
+!!! warning "O sentido da variação: argila em cima, areia embaixo"
+
+    Em \(\alpha\), a **argila** leva o valor mais alto (0,85) e a **areia** o
+    mais baixo (0,50). É contraintuitivo para quem espera que areia resista
+    mais — mas o fator não mede resistência, e sim **quanto do método original
+    se aproveita** naquele solo com aquela execução. A escavação alivia mais a
+    ponta em areia que em argila, e é isso que o fator penaliza.
+
+    Trocar as linhas inverte o resultado: uma escavada em areia ganharia 70 % a
+    mais de ponta do que deve.
+
+!!! info "Três tipos ficam de fora"
+
+    Pré-moldadas, metálicas e Franki mantêm \(\alpha = \beta = 1\) — o método
+    original de 1978, sem correção.
 
 ---
 
 ## Teixeira
 
-### Coeficiente αT (kPa)
+Válida para \(4 < N_{SPT} < 40\).
 
-Depende simultaneamente do solo e do tipo de estaca.
+### Parâmetro α (kPa)
 
-| Código | Solo | Pré-mold. | Esc. c/ fluido | Esc. s/ fluido | Franki | Raiz | Hélice | Ômega |
-| :-- | :-- | --: | --: | --: | --: | --: | --: | --: |
-| 1 | Areia | 400 | 400 | 270 | 340 | 260 | 270 | 270 |
-| 12 | Areia Siltosa | 360 | 360 | 240 | 300 | 220 | 240 | 240 |
-| 123 | Areia Siltoargilosa | 330 | 330 | 220 | 270 | 205 | 220 | 220 |
-| 13 | Areia Argilosa | 300 | 300 | 200 | 240 | 190 | 200 | 200 |
-| 132 | Areia Argilossiltosa | 330 | 330 | 220 | 270 | 205 | 220 | 220 |
-| 2 | Silte | 160 | 160 | 110 | 120 | 110 | 110 | 110 |
-| 21 | Silte Arenoso | 260 | 260 | 160 | 210 | 160 | 160 | 160 |
-| 213 | Silte Arenoargiloso | 210 | 210 | 135 | 165 | 135 | 135 | 135 |
-| 23 | Silte Argiloso | 160 | 160 | 110 | 120 | 110 | 110 | 110 |
-| 231 | Silte Argiloarenoso | 135 | 135 | 135 | 165 | 135 | 135 | 135 |
-| 3 | Argila | 100 | 100 | 100 | 100 | 100 | 100 | 100 |
-| 31 | Argila Arenosa | 130 | 130 | 130 | 160 | 140 | 130 | 130 |
-| 312 | Argila Arenossiltosa | 115 | 115 | 115 | 130 | 120 | 115 | 115 |
-| 32 | Argila Siltosa | 100 | 100 | 100 | 100 | 100 | 100 | 100 |
-| 321 | Argila Siltoarenosa | 115 | 115 | 115 | 130 | 120 | 115 | 115 |
+Tab. 1.9 — Teixeira (1996). Depende do solo **e** do tipo de estaca.
 
-### Coeficiente βT (kPa)
+| Solo | Pré-moldada e perfil metálico | Franki | Escavada a céu aberto | Raiz |
+| :-- | --: | --: | --: | --: |
+| Argila siltosa | 110 | 100 | 100 | 100 |
+| Silte argiloso | 160 | 120 | 110 | 110 |
+| Argila arenosa | 210 | 160 | 130 | 140 |
+| Silte arenoso | 260 | 210 | 160 | 160 |
+| Areia argilosa | 300 | 240 | 200 | 190 |
+| Areia siltosa | 360 | 300 | 240 | 220 |
+| Areia | 400 | 340 | 270 | 260 |
+| Areia com pedregulhos | 440 | 380 | 310 | 290 |
 
-Depende só do tipo de estaca.
+### Parâmetro β (kPa)
 
-| Tipo de estaca | \(\beta_T\) |
+Tab. 1.10 — depende **apenas** do tipo de estaca.
+
+| Tipo de estaca | \(\beta\) (kPa) |
 | :-- | --: |
-| Pré-moldada | 4 |
-| Escavada com fluido | 4 |
-| Escavada sem fluido | 4 |
-| Hélice contínua | 4 |
-| Ômega | 4 |
+| Pré-moldada e perfil metálico | 4 |
 | Franki | 5 |
+| Escavada a céu aberto | 4 |
 | Raiz | 6 |
+
+### Atrito lateral em argila mole sensível
+
+Tab. 1.11 — para o caso em que o método **não se aplica**: estacas
+pré-moldadas de concreto flutuantes em espessas camadas de argila mole
+sensível, com \(N_{SPT}\) normalmente inferior a 3. Aqui \(r_L\) é tabelado
+direto, pela natureza do sedimento.
+
+| Sedimento | \(r_L\) (kPa) |
+| :-- | --: |
+| Argila fluviolagunar (SFL) | 20 a 30 |
+| Argila transicional (AT) | 60 a 80 |
+
+**SFL** — argilas fluviolagunares e de baías, holocênicas, situadas até cerca
+de 20 a 25 m de profundidade, com \(N_{SPT} < 3\), cinza-escuras, ligeiramente
+pré-adensadas.
+
+**AT** — argilas transicionais, pleistocênicas, subjacentes ao SFL, com
+\(N_{SPT}\) de 4 a 8, às vezes cinza-claras, com tensões de pré-adensamento
+maiores que as do SFL.
+
+!!! warning "A tabela do programa cobre mais tipos que a fonte"
+
+    Teixeira tabelou **quatro** tipos de estaca. O SPX oferece sete, e os três
+    restantes — escavada com fluido, hélice contínua e ômega — recebem valores
+    **extrapolados**, não publicados pelo autor.
+
+    Registre isso na memória de cálculo quando usar o método nesses tipos.
 
 ---
 
 ## Coeficiente m para Kh
 
-Usado na [reação do solo](reacao-do-solo.md). Selecionado pelo dígito
-dominante — areias e siltes usam a tabela de areia, argilas a de argila.
+Usado na [reação do solo](reacao-do-solo.md), não na capacidade de carga.
+Selecionado pela fração dominante — solos arenosos e siltosos usam a tabela de
+areia, argilosos a de argila.
 
 ### Areias e siltes (kN/m⁴)
 
@@ -155,9 +208,9 @@ dominante — areias e siltes usam a tabela de areia, argilas a de argila.
 | 40–49 | Compacta | 8000 – 14300 |
 | 50 | Muito compacta | 15000 |
 
-A tabela é definida ponto a ponto para cada \(N_{SPT}\) inteiro. A progressão é
-linear por faixa, com inclinações diferentes: cerca de 154 kN/m⁴ por golpe na
-faixa pouco compacta e 700 na compacta.
+A tabela é definida ponto a ponto para cada \(N_{SPT}\) inteiro, com progressão
+linear por faixa: cerca de 154 kN/m⁴ por golpe na faixa pouco compacta e 700 na
+compacta.
 
 ### Argilas (kN/m⁴)
 
@@ -174,16 +227,22 @@ faixa pouco compacta e 700 na compacta.
 !!! warning validade "Saturação fora da faixa"
 
     Acima do último \(N_{SPT}\) tabelado — 50 para areias, 30 para argilas — o
-    programa adota o último valor, **sem extrapolar**. Uma argila com \(N = 45\)
-    recebe o mesmo \(m\) de uma com \(N = 30\).
+    programa adota o último valor, **sem extrapolar**. Uma argila com
+    \(N = 45\) recebe o mesmo \(m\) de uma com \(N = 30\).
 
     É a decisão conservadora, mas significa que, em solos muito resistentes, o
     modelo subestima a rigidez horizontal e superestima os deslocamentos.
 
 ---
 
-## Pesos específicos
+## Módulo de deformabilidade do solo
 
-Usados na tensão geostática do cálculo de [recalque](recalque.md), buscados por
-\(N_{SPT}\) médio e natureza do solo. Na falta de correspondência, o programa
-adota 18 kN/m³.
+Usado no [recalque](recalque.md). Aoki (1984):
+
+| Tipo de estaca | \(E_0\) |
+| :-- | :-- |
+| Cravadas | \(6 \, K \, N_{SPT}\) |
+| Hélice contínua | \(4 \, K \, N_{SPT}\) |
+| Escavadas | \(3 \, K \, N_{SPT}\) |
+
+com \(K\) da tabela de [Aoki-Velloso](#aoki-velloso).

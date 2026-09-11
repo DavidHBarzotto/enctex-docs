@@ -66,47 +66,37 @@ A entrada e a saída são em unidades do SI usuais da geotecnia brasileira.
     apresentado — tabela, gráfico e relatório — vem em **milímetros**, que é a
     unidade em que se discute recalque admissível.
 
-## Códigos de solo
+## Tipos de solo
 
-O tipo de solo é identificado por um **código numérico**, e não por texto. A
-regra de formação é posicional: o primeiro dígito é a fração dominante, os
-seguintes são as secundárias, em ordem decrescente.
+O SPX classifica o solo pelas frações que o compõem, na ordem em que
+predominam. São quinze combinações:
 
-| Dígito | Fração |
-| :-- | :-- |
-| **1** | Areia |
-| **2** | Silte |
-| **3** | Argila |
+| | | |
+| :-- | :-- | :-- |
+| Areia | Silte | Argila |
+| Areia siltosa | Silte arenoso | Argila arenosa |
+| Areia siltoargilosa | Silte arenoargiloso | Argila arenossiltosa |
+| Areia argilosa | Silte argiloso | Argila siltosa |
+| Areia argilossiltosa | Silte argiloarenoso | Argila siltoarenosa |
 
-Assim, `123` é *areia siltoargilosa*: dominante areia (1), depois silte (2),
-depois argila (3).
+O nome se lê como a composição: *areia siltoargilosa* é dominante areia, depois
+silte, depois argila.
 
-A tabela completa aceita pelos programas:
+!!! warning "A classificação escolhe os parâmetros de cálculo"
 
-| Código | Solo | Código | Solo |
-| :-- | :-- | :-- | :-- |
-| 1 | Areia | 3 | Argila |
-| 12 | Areia Siltosa | 31 | Argila Arenosa |
-| 123 | Areia Siltoargilosa | 312 | Argila Arenossiltosa |
-| 13 | Areia Argilosa | 32 | Argila Siltosa |
-| 132 | Areia Argilossiltosa | 321 | Argila Siltoarenosa |
-| 2 | Silte | | |
-| 21 | Silte Arenoso | | |
-| 213 | Silte Arenoargiloso | | |
-| 23 | Silte Argiloso | | |
-| 231 | Silte Argiloarenoso | | |
+    O tipo de solo não é rótulo: é ela que seleciona \(K\) e \(lpha\) na
+    tabela de Aoki-Velloso, \(C\) na de Décourt-Quaresma, \(lpha_T\) na de
+    Teixeira e o fator \(m\) das molas.
 
-!!! warning "O código escolhe os parâmetros"
+    Trocar **areia siltosa** por **silte arenoso** — nomes parecidos,
+    composições invertidas — muda \(K\) de 0,80 para 0,55 MPa, ou seja,
+    **31 % a menos de resistência de ponta**. Confira a classificação do
+    boletim antes de lançar.
 
-    O código de solo não é rótulo: é ele que seleciona \(K\) e \(\alpha\) na
-    tabela de Aoki-Velloso, \(C\) na de Décourt-Quaresma e \(\alpha_T\) na de
-    Teixeira. Trocar `12` por `21` — areia siltosa por silte arenoso — muda
-    \(K\) de 800 para 550 kPa, ou seja, **31 % a menos de resistência de
-    ponta**. Confira a classificação do boletim antes de lançar.
-
-Alguns métodos usam apenas o **dígito dominante**. Décourt-Quaresma e o
-coeficiente de reação horizontal, por exemplo, extraem o primeiro dígito para
-decidir se o solo é arenoso, siltoso ou argiloso.
+Nem todo método usa a classificação completa. **Décourt-Quaresma** trabalha com
+três famílias apenas — argilas, solos intermediários e areias — e o
+**coeficiente de reação horizontal** distingue apenas solos arenosos e siltosos
+de argilosos.
 
 ## Discretização da sondagem
 

@@ -4,227 +4,284 @@ O SPX calcula a capacidade de carga por três métodos semiempíricos brasileiro
 em paralelo, para **cada cota possível de ponta**. O resultado é uma tabela por
 profundidade, e não um número único.
 
-Todos os três partem da mesma decomposição:
+Todos partem da mesma decomposição:
 
 \[
-R_{total}(z) = R_p(z) + R_l(z)
+R = R_p + R_L
 \]
 
-onde \(R_p\) é a resistência de ponta e \(R_l\) a resistência acumulada por
-atrito lateral, ambos em kN:
+Daí em diante **eles divergem, e não apenas nos coeficientes**. A diferença
+mais importante — e a que mais confunde quem compara resultados — está na
+**forma da parcela lateral**:
 
-\[
-R_p = r_p \cdot A_p
-\qquad\qquad
-R_l(z) = \sum_{i=1}^{z} r_{l,i} \cdot U \cdot \Delta L_i
-\]
-
-com \(A_p = \pi D^2/4\) a área da ponta, \(U = \pi D\) o perímetro e
-\(\Delta L_i = 1\) m, já que a sondagem é discretizada metro a metro.
-
-O que distingue os métodos é **como se obtém \(r_p\) e \(r_l\) a partir do
-\(N_{SPT}\)** — e, principalmente, **qual \(N\) se usa na ponta**.
-
----
-
-## Aoki-Velloso
-
-### Formulação
-
-\[
-r_p = \frac{K \cdot N_p}{F_1}
-\qquad\qquad
-r_l = \frac{\alpha \cdot K \cdot N_l}{F_2}
-\]
-
-| Símbolo | Significado | Fonte |
+| Método | Resistência lateral | O que \(N\) representa |
 | :-- | :-- | :-- |
-| \(K\) | Coeficiente do solo, em kPa | [Tabela de \(K\) e \(\alpha\)](tabelas.md#aoki-velloso) |
-| \(\alpha\) | Razão atrito/ponta do solo | idem |
-| \(F_1, F_2\) | Fatores de execução da estaca | [Tabela de \(F_1\) e \(F_2\)](tabelas.md#fatores-de-execucao) |
-| \(N_p\) | \(N_{SPT}\) na ponta | Ver abaixo |
-| \(N_l\) | \(N_{SPT}\) da camada, no fuste | Camada corrente |
+| **Aoki-Velloso** | \(R_L = U \sum (r_L \, \Delta L)\) — soma camada a camada | \(N_L\) da camada de espessura \(\Delta L\) |
+| **Décourt-Quaresma** | \(R_L = r_L \, U \, L\) — um valor único no fuste inteiro | \(N_L\) **médio ao longo do fuste** |
+| **Teixeira** | \(R_L = \beta \, N_L \, U \, L\) — idem | \(N_L\) **médio ao longo do fuste** |
 
-### Qual N vai na ponta
-
-!!! info "Decisão de implementação"
-
-    Para a ponta na cota \(i\), o SPX usa o \(N_{SPT}\) da camada
-    **imediatamente abaixo** — o índice \(i+1\). A camada que resiste à ponta é
-    a que está sob ela, não a que a estaca acabou de atravessar.
-
-    Na última cota da sondagem, onde não há camada abaixo, o último valor é
-    repetido. Isso torna o resultado na cota final **otimista se o perfil
-    estava melhorando** — motivo para não dimensionar com a ponta no último
-    metro investigado.
-
-O atrito lateral, ao contrário, usa o \(N\) da própria camada — índice \(i\) —,
-porque é ela que envolve o fuste naquele trecho.
+Só Aoki-Velloso integra o atrito camada a camada. Nos outros dois, o fuste
+recebe **uma tensão única**, calculada a partir da média do \(N_{SPT}\) — e
+aplicá-los na forma somatória de Aoki dá resultado diferente do método.
 
 ---
 
-## Décourt-Quaresma
+## Aoki-Velloso (1975)
+
+### Origem
+
+O método nasceu de correlações com o ensaio **CPT**, pela resistência de ponta
+do cone (\(q_c\)) e pelo atrito lateral na luva (\(f_s\)):
+
+\[
+r_p = \frac{q_c}{F_1}
+\qquad\qquad
+r_L = \frac{f_s}{F_2}
+\]
+
+Como no Brasil o CPT é pouco empregado, \(q_c\) foi substituído por uma
+correlação com o SPT, \(q_c = K \, N_{SPT}\), e o atrito pela razão de atrito
+\(\alpha = f_s / q_c\).
 
 ### Formulação
 
 \[
-r_p = \alpha \cdot C \cdot N_p
+r_p = \frac{K \, N_p}{F_1}
 \qquad\qquad
-r_l = 10\,\beta\left(\frac{N_l}{3} + 1\right)
+r_L = \frac{\alpha \, K \, N_L}{F_2}
 \]
-
-com \(r_l\) em kPa. Os coeficientes \(\alpha\) e \(\beta\) dependem
-simultaneamente do **tipo de estaca** e do **tipo de solo**, e \(C\) só do solo.
-
-!!! note "Só o dígito dominante"
-
-    Para escolher \(\alpha\) e \(\beta\), o método usa apenas o **primeiro
-    dígito** do código de solo: `123` (areia siltoargilosa) é tratado como
-    areia. É uma simplificação do próprio método, que classifica em três
-    famílias apenas.
-
-### O N de ponta é uma média de três
 
 \[
-N_p = \frac{N_{i-1} + N_i + N_{i+1}}{3}
+R = \frac{K \, N_p}{F_1}A_p \;+\; \frac{U}{F_2}\sum_{1}^{n}\left(\alpha \, K \, N_L \, \Delta L\right)
 \]
 
-a média entre a camada de apoio e as imediatamente acima e abaixo. Isso torna
-o método **menos sensível a um golpe isolado** do que Aoki-Velloso — uma lente
-resistente de um metro não é capaz, sozinha, de sustentar a ponta.
+| Símbolo | Significado |
+| :-- | :-- |
+| \(K\) | Coeficiente do solo, em MPa — [tabela](tabelas.md#aoki-velloso) |
+| \(\alpha\) | Razão de atrito do solo, em % — idem |
+| \(F_1, F_2\) | Fatores de correção por tipo de estaca — [tabela](tabelas.md#fatores-de-execucao) |
+| \(N_p\) | \(N_{SPT}\) **na cota de apoio da ponta** |
+| \(N_L\) | \(N_{SPT}\) **médio na camada** de espessura \(\Delta L\) |
 
-Nas duas últimas cotas, onde faltam camadas abaixo, o último valor é repetido
-para completar a média.
+### Os fatores de correção
 
-### Fatores de segurança
+\(F_1\) e \(F_2\) cobrem o **efeito de escala** — a diferença entre a estaca
+(protótipo) e o cone do CPT (modelo) — e a influência do método executivo.
 
-Décourt-Quaresma **não** usa fator global. Ele separa as parcelas, porque a
-confiabilidade delas é diferente:
+Como \(F_1 > 1{,}0\), a resistência de ponta da estaca resulta **inferior à do
+cone**: é o efeito escala invertido, e ele é comprovado experimentalmente.
+
+\(F_2\) deveria valer o mesmo que \(F_1\), mas engloba também uma correção de
+leitura: no cone mecânico, a parte inferior da luva de Begemann gera uma
+resistência de ponta capaz de dobrar o valor lido de atrito. Daí
+\(F_1 \le F_2 \le 2F_1\), e os autores adotaram a hipótese mais conservadora:
 
 \[
-P_a = \frac{R_p}{4} + \frac{R_l}{1{,}3}
+F_2 = 2\,F_1
 \]
 
-A ponta leva 4 e o fuste 1,3. A razão é física: o atrito lateral se mobiliza
-com deslocamentos milimétricos, enquanto a ponta exige recalques da ordem de
-10 % do diâmetro para se desenvolver plenamente. Na carga de trabalho, a ponta
-ainda não está lá.
+!!! note "Se os dados vierem de cone elétrico"
 
-### Estacas escavadas
-
-Para estaca escavada em **compressão**, entra um limite adicional:
-
-\[
-P_a \le 1{,}25 \, R_l
-\]
-
-e o programa adota o menor entre esse limite e o valor do método. A restrição
-reconhece que, em estaca escavada, a limpeza imperfeita do fundo torna a ponta
-pouco confiável — o projeto não deve depender dela.
-
-### Tração
-
-Com \(N < 0\) o programa entende estaca tracionada e passa a:
-
-\[
-P_a = \frac{R_l}{1{,}3}
-\]
-
-A resistência de ponta é **integralmente descartada** — uma estaca puxada para
-cima não tem ponta a mobilizar.
+    No cone elétrico e no piezocone a leitura é feita na ponteira, sem esse
+    erro. Usando o método com dados de CPT em vez de SPT, deve-se adotar
+    \(F_2 = F_1\).
 
 ---
 
-## Teixeira
+## Décourt-Quaresma (1978)
 
 ### Formulação
 
 \[
-r_p = \alpha_T \cdot N_p
+R_L = r_L \, U \, L
 \qquad\qquad
-r_l = \beta_T \cdot N_l
+R_p = r_p \, A_p
 \]
 
-Aqui \(\alpha_T\) depende do par solo × tipo de estaca, e \(\beta_T\) só do
-tipo de estaca. Ambos estão em [Tabelas de parâmetros](tabelas.md#teixeira).
+Note que \(R_L\) **não é um somatório**: uma única tensão de atrito multiplica
+o perímetro e o comprimento inteiro do fuste.
 
-### A janela 4D acima, 1D abaixo
+### A tensão de atrito
 
-O \(N_p\) de Teixeira é a média em uma janela ao redor da ponta, definida em
-função do **diâmetro**:
+Décourt (1982) transformou a tabela original dos autores nesta expressão:
 
 \[
-N_p = \text{média de } N_{SPT} \text{ no trecho } [\,z - 4D,\; z + D\,]
+r_L = 10\left(\frac{N_L}{3} + 1\right) \qquad [\text{kPa}]
 \]
 
-É a definição mais fisicamente fundamentada dos três: o bulbo de tensões da
-ponta tem extensão proporcional ao diâmetro, e uma estaca de 1,0 m mobiliza um
-volume de solo muito maior do que uma de 0,25 m. Em consequência, **o mesmo
-perfil dá pontas diferentes para diâmetros diferentes** — o que é correto, e
-costuma surpreender quem compara com os outros métodos.
+onde \(N_L\) é o \(N_{SPT}\) **médio ao longo do fuste**, **sem nenhuma
+distinção quanto ao tipo de solo**.
 
-O atrito lateral usa a média de \(N\) do topo até a cota corrente, e não o \(N\)
-da camada isolada.
+!!! warning "Três regras sobre a média do fuste"
 
-### Fatores de segurança
+    1. **Limite inferior \(N_L \ge 3\)** e **limite superior \(N_L \le 15\)**.
+    2. Décourt (1982) estende o teto para \(N_L = 50\) em estacas de
+       deslocamento e escavadas com bentonita, **mantendo \(N_L \le 15\)** para
+       estacas Strauss e tubulões a céu aberto.
+    3. Os valores de \(N\) usados na avaliação da **resistência de ponta não
+       entram** na média do fuste.
 
-Critério geral da NBR 6122:
+### A resistência de ponta
 
 \[
-P_a = \frac{R_{total}}{2}
+r_p = C \, N_p
 \]
 
-Para estacas **escavadas**, entra o critério alternativo
+\(N_p\) é a média de **três valores**: o correspondente ao nível da ponta, o
+imediatamente anterior e o imediatamente posterior. O coeficiente \(C\) depende
+do solo — [tabela](tabelas.md#decourt-quaresma) —, ajustado com 41 provas de
+carga em estacas pré-moldadas de concreto.
+
+### Os fatores de Décourt (1996)
 
 \[
-P_a = \frac{R_l}{4} + \frac{R_p}{1{,}5}
+R = \alpha \, C \, N_p \, A_p \;+\; \beta \, 10\left(\frac{N_L}{3}+1\right) U \, L
 \]
 
-e o programa adota **o menor** dos dois.
+Eles estendem o método a estacas escavadas — com lama bentonítica ou em geral,
+inclusive tubulões a céu aberto —, hélice contínua, raiz e injetadas sob altas
+pressões. Os valores estão nas [tabelas](tabelas.md#fatores-alfa-e-beta).
+
+!!! info "O método original permanece para três tipos"
+
+    Para estacas **pré-moldadas, metálicas e Franki**, vale
+    \(\alpha = \beta = 1\) — ou seja, o método de 1978 sem correção.
+
+### Critério de carga admissível
+
+Décourt propõe fatores parciais, e é o que o SPX aplica:
+
+\[
+P_a = \frac{R_p}{4} + \frac{R_L}{1{,}3}
+\]
+
+A ponta leva 4 e o fuste 1,3 porque a confiabilidade das duas parcelas é
+diferente: o atrito se mobiliza com deslocamentos milimétricos, enquanto a
+ponta exige recalques da ordem de 10 % do diâmetro para se desenvolver
+plenamente — na carga de trabalho, ela ainda não está lá.
+
+Para estaca **escavada em compressão** entra o limite adicional
+\(P_a \le 1{,}25\,R_L\), e o programa adota o menor.
+Em **tração**, a ponta é integralmente descartada: \(P_a = R_L/1{,}3\).
 
 ---
 
-## Comparação dos três
+## Teixeira (1996)
+
+### Formulação
+
+Uma equação unificada, com dois parâmetros que multiplicam o \(N_{SPT}\)
+diretamente:
+
+\[
+R = R_p + R_L = \alpha \, N_p \, A_p + \beta \, N_L \, U \, L
+\]
+
+Aqui \(\alpha\) e \(\beta\) já estão em **kPa** — não são adimensionais como os
+de Décourt, apesar do mesmo nome.
+
+| Símbolo | Significado |
+| :-- | :-- |
+| \(N_p\) | \(N_{SPT}\) médio no intervalo de **4 diâmetros acima** da ponta a **1 diâmetro abaixo** |
+| \(N_L\) | \(N_{SPT}\) **médio ao longo do fuste** |
+| \(\alpha\) | Função do solo **e** do tipo de estaca — [tabela](tabelas.md#teixeira) |
+| \(\beta\) | Função **apenas** do tipo de estaca — idem |
+
+A janela \([-4D, +D]\) é a definição mais fisicamente fundamentada das três: o
+bulbo de tensões da ponta tem extensão proporcional ao diâmetro. Em
+consequência, **o mesmo perfil dá pontas diferentes para diâmetros
+diferentes** — o que é correto, e costuma surpreender quem compara com os
+outros métodos.
+
+### Critério de carga admissível
+
+O SPX aplica o critério geral da NBR 6122, \(P_a = R/2\), e para estacas
+escavadas adota também \(P_a = R_L/4 + R_p/1{,}5\), ficando com o **menor** dos
+dois.
+
+---
+
+## Comparação
 
 | | Aoki-Velloso | Décourt-Quaresma | Teixeira |
 | :-- | :-- | :-- | :-- |
-| \(N\) de ponta | Camada abaixo | Média de 3 camadas | Média em \([-4D, +D]\) |
-| \(N\) de fuste | Da camada | Da camada | Média acumulada |
-| Depende do diâmetro? | Só na área e perímetro | Só na área e perímetro | **Também no \(N_p\)** |
-| Fator de segurança | Global 2 (NBR 6122) | 4 na ponta, 1,3 no fuste | Global 2, ou 4/1,5 se escavada |
-| Trata tração? | — | Sim, só lateral com FS 1,3 | — |
-| Sensível a lente isolada | **Muito** | Pouco | Pouco |
+| Forma de \(R_L\) | Somatório por camada | Tensão única × \(U L\) | Tensão única × \(U L\) |
+| \(N\) do fuste | Médio na camada | **Médio no fuste**, \(3 \le N_L \le 15\) | **Médio no fuste** |
+| \(N\) da ponta | Na cota da ponta | Média de 3 valores | Média em \([-4D, +D]\) |
+| Distingue o solo no fuste? | Sim, por \(\alpha K\) | **Não** | Não — β só depende da estaca |
+| Depende do diâmetro? | Só em \(A_p\) e \(U\) | Só em \(A_p\) e \(U\) | **Também em \(N_p\)** |
+| Unidade dos coeficientes | \(K\) em MPa, \(\alpha\) em % | \(C\) em kPa | \(\alpha, \beta\) em kPa |
 
 !!! tip "Como ler a divergência"
 
-    Os três métodos não deveriam concordar, e concordância excessiva é mais
-    suspeita que divergência. Quando os resultados se afastam muito, o
-    responsável costuma ser o \(N_p\): perfis com variação brusca perto da
-    ponta separam Aoki dos demais, e diâmetros grandes separam Teixeira dos
-    demais.
+    Os três não deveriam concordar, e concordância excessiva é mais suspeita
+    que divergência.
+
+    - **Perfil heterogêneo** separa Aoki dos outros dois: só ele integra o
+      atrito camada a camada, enquanto Décourt e Teixeira achatam o fuste numa
+      média.
+    - **Perfil com \(N\) alto no fuste** separa Décourt: o teto da média
+      (15 ou 50, conforme a estaca) trunca a contribuição lateral.
+    - **Diâmetro grande** separa Teixeira, pelo \(N_p\) em janela.
 
     A prática defensável é adotar o **menor** dos três, ou o método com
-    calibração regional conhecida, e registrar a escolha na memória de cálculo.
+    calibração regional conhecida, registrando a escolha na memória de cálculo.
+
+---
+
+## Efeito de grupo
+
+Tudo acima vale para o **elemento isolado**. A capacidade do grupo pode diferir
+da soma dos elementos, e isso se quantifica pela eficiência:
+
+\[
+\eta = \frac{R_g}{\sum R_i}
+\]
+
+O entendimento atual, apoiado em ensaios em grupos, é que a eficiência é
+**geralmente igual ou superior à unidade**:
+
+| Situação | Eficiência |
+| :-- | :-- |
+| Estacas de qualquer tipo em argila | \(\approx 1\) |
+| Estacas escavadas em qualquer solo | \(\approx 1\) |
+| Estacas cravadas em areia, sobretudo fofa | **> 1** — até 1,5 ou 1,7 |
+
+!!! note "O SPX não aplica ganho de grupo"
+
+    Não há teoria ou fórmula apropriada para estimar a eficiência, e a prática
+    corrente de projeto **não leva em conta** possíveis benefícios — o que é a
+    postura conservadora. O programa segue essa prática: dimensiona por
+    elemento isolado.
+
+---
 
 ## Limites de validade
 
 !!! warning validade "Faixa de aplicação"
 
-    Os três métodos são **semiempíricos**, calibrados contra provas de carga em
-    um universo limitado. Fora dele, extrapolam sem avisar:
-
-    - **Só valem com \(N_{SPT}\)** de sondagem à percussão executada conforme a
-      NBR 6484. Correlações com outros ensaios exigem conversão prévia.
+    - Os três são **semiempíricos**, calibrados contra provas de carga em um
+      universo limitado. Aoki-Velloso ajustou \(F_1\) e \(F_2\) com 63 provas;
+      Décourt-Quaresma ajustou \(C\) com 41, em pré-moldadas de concreto.
+    - **Teixeira vale para \(4 < N_{SPT} < 40\)** — é a faixa declarada da
+      tabela de \(\alpha\). Fora dela, extrapola.
+    - **Teixeira não se aplica** a estacas pré-moldadas de concreto flutuantes
+      em espessas camadas de argila mole sensível, com \(N_{SPT} < 3\). Nesse
+      caso o autor tabela \(r_L\) diretamente pela natureza do sedimento —
+      20 a 30 kPa em argila fluviolagunar, 60 a 80 kPa em argila transicional.
+    - **Só valem com \(N_{SPT}\)** de sondagem à percussão conforme a NBR 6484.
     - **Não cobrem** solos colapsíveis, expansivos, orgânicos moles, rochas
       alteradas nem matacões.
     - **Não consideram** atrito negativo, que precisa ser somado à parte quando
       houver aterro recente ou rebaixamento de lençol.
-    - **Não consideram** efeito de grupo na capacidade. O bloco com várias
-      estacas próximas tem capacidade menor que a soma das isoladas.
-    - \(N_{SPT} > 50\) está fora da faixa de calibração da maioria das
-      correlações. Valores altos devem ser truncados por julgamento.
-    - A NBR 6122 exige **prova de carga** acima de certos números de estacas e
-      em obras de maior porte. Nenhum método semiempírico a dispensa.
+    - As correlações originais são **abrangentes**, não regionais. A tendência
+      recomendada é manter a formulação e substituir \(K\) e \(\alpha\) por
+      correlações locais de validade comprovada — como as de Alonso (1980) para
+      São Paulo e as de Danziger & Velloso (1986) para o Rio de Janeiro.
+    - A NBR 6122 exige **prova de carga** acima de certos números de estacas.
+      Nenhum método semiempírico a dispensa.
+
+---
 
 ## Resultado apresentado
 
@@ -233,11 +290,11 @@ A tabela de cada método traz, por cota:
 | Coluna | Conteúdo |
 | :-- | :-- |
 | Cotas (m) | Profundidade da ponta, negativa |
-| \(R_l\) (kN) acum. | Atrito lateral acumulado do topo até a cota |
+| \(R_L\) (kN) | Resistência lateral até aquela cota |
 | \(R_p\) (kN) | Resistência de ponta naquela cota |
 | \(R_t\) (kN) | Soma das duas |
 | \(P_a\) Final (kN) | Carga admissível, já com os fatores e limites cabíveis |
 
 Para estacas escavadas em compressão, Décourt-Quaresma acrescenta as colunas
 `Pa escavada` e `Pa Dec-Qua`, mostrando o limite e o valor sem limite lado a
-lado — para que se veja **qual dos dois governou**.
+lado — para que se veja **qual critério governou**.

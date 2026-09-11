@@ -72,7 +72,8 @@ Antes do primeiro projeto, vale a leitura de
 [Convenções e unidades](../../comecar/convencoes.md). Os dois pontos que mais
 geram erro:
 
-1. **O código de solo é numérico e posicional.** `12` é areia siltosa; `21` é
-   silte arenoso. Trocar os dois muda \(K\) de 800 para 550 kPa.
+1. **A classificação do solo escolhe os parâmetros.** *Areia siltosa* e
+   *silte arenoso* têm nomes parecidos e composições invertidas: trocá-los muda
+   \(K\) de 0,80 para 0,55 MPa.
 2. **Normal positivo é compressão.** Com valor negativo o programa passa a
    calcular tração, desprezando a ponta.

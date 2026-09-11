@@ -1,167 +1,244 @@
 # Recalque
 
-O SPX estima o recalque da estaca isolada pelo método de **Cintra & Aoki**,
-decompondo-o em duas parcelas de natureza distinta:
+Uma estaca de comprimento \(L\), com a base a uma distância \(C\) da superfície
+do **indeslocável** — o topo rochoso ou a camada tão rígida que as deformações
+abaixo dela podem ser desprezadas —, sofre dois tipos de deformação sob a carga
+vertical \(P\):
 
 \[
-\rho = \rho_E + \rho_S
+\rho = \rho_e + \rho_s
 \]
 
-| Parcela | O que é | Ordem de grandeza |
-| :-- | :-- | :-- |
-| \(\rho_E\) | Encurtamento **elástico da própria estaca**, como peça de concreto comprimida | Milímetros |
-| \(\rho_S\) | Recalque **do solo** sob a ponta | Geralmente a parcela dominante |
+| Parcela | O que é |
+| :-- | :-- |
+| \(\rho_e\) | **Encurtamento elástico da própria estaca**, como peça estrutural comprimida, com a base mantida imóvel |
+| \(\rho_s\) | **Recalque do solo** — a compressão dos estratos entre a base da estaca e o indeslocável |
+
+Em consequência, o comprimento passa a \(L - \rho_e\) e a distância ao
+indeslocável a \(C - \rho_s\).
 
 ---
 
-## Parcela elástica da estaca
+## Encurtamento elástico
 
-A estaca encurta sob a carga que a percorre. Como o atrito lateral vai
-descarregando a estaca à medida que ela desce, a força normal **não é
-constante** ao longo do fuste: ela é máxima no topo e mínima na ponta.
+### O diagrama de esforço normal
+
+A força normal **não é constante** ao longo do fuste: ela cai de \(P\) na
+cabeça até \(P_p\) na base, pela transferência de carga ao solo por atrito.
+
+A metodologia é a de **Aoki (1979)**, e parte de três hipóteses:
+
+1. A carga aplicada é maior que a resistência lateral e menor que a capacidade
+   de carga: \(R_L < P < R\).
+2. **Todo o atrito lateral está mobilizado.**
+3. A reação na ponta equilibra o que sobra, e é inferior à resistência de ponta
+   na ruptura: \(P_p = P - R_L < R_p\).
+
+Supondo variação linear de \(P(z)\) em cada segmento correspondente a uma
+camada, o esforço normal **médio** em cada segmento é:
 
 \[
-\rho_E = \sum_{i} \frac{P_i \cdot \Delta L_i}{A \cdot E_c}
+P_1 = P - \frac{R_{L1}}{2}
+\]
+\[
+P_2 = P - R_{L1} - \frac{R_{L2}}{2}
+\]
+\[
+P_3 = P - R_{L1} - R_{L2} - \frac{R_{L3}}{2}
 \]
 
-onde \(P_i\) é a força normal média no trecho \(i\), \(A = \pi D^2/4\) e
-\(E_c\) o módulo de elasticidade da estaca.
+— e assim por diante: a carga já transferida acima do segmento, mais **metade**
+da que se transfere dentro dele.
+
+### A lei de Hooke
+
+\[
+\rho_e = \frac{1}{A \, E_c} \sum \left(P_i \, L_i\right)
+\]
+
+com \(A\) a área da seção transversal do fuste e \(E_c\) o módulo de
+elasticidade do concreto, suposto constante.
 
 ### Módulo de elasticidade
 
-Pode ser informado pelo usuário. Se não for, o programa adota por tipo:
+Na ausência de valor específico:
 
-| Tipo de estaca | \(E_c\) adotado |
+| Tipo de estaca | \(E_c\) |
 | :-- | --: |
-| Pré-moldada | 28 GPa |
-| Hélice contínua, Franki, Ômega, Raiz | 21 GPa |
-| Demais (escavadas) | 18 GPa |
+| Pré-moldada | 28 a 30 GPa |
+| Hélice contínua, Franki e estacão | 21 GPa |
+| Strauss e escavada a seco | 18 GPa |
 
-A escala reflete o controle de qualidade da concretagem: peça moldada em
-fábrica, com cura controlada, contra concreto lançado em furo.
+Para referência: aço 210 GPa, madeira da ordem de 10 GPa.
+
+!!! note "Comparação com o pilar"
+
+    Num pilar, o diagrama de normal é constante e igual a \(P\), e o
+    encurtamento vale simplesmente \(P L / A E_c\). A estaca difere porque o
+    solo vai descarregando o fuste — e é por isso que o cálculo precisa do
+    diagrama, não só da carga de topo.
 
 ---
 
-## Parcela do solo
+## Recalque do solo
 
-### Tensão na ponta
+Pelo princípio da ação e reação, a estaca aplica ao solo as cargas \(R_{Li}\)
+ao longo do fuste e a carga \(P_p\) junto à base. As camadas entre a base e o
+indeslocável se deformam sob esse carregamento.
 
-A carga é espalhada sobre uma área maior que a da ponta, por um bulbo de
-influência:
+A metodologia é a de **Aoki (1984)**.
 
-\[
-\Delta\sigma = \frac{P}{A_{infl}}
-\qquad\text{com}\qquad
-A_{infl} = \frac{\pi\,(D + 1{,}5)^2}{4}
-\]
+### Acréscimo de tensões
 
-O acréscimo de 1,5 m no diâmetro representa o espraiamento das tensões abaixo
-da ponta.
+Supondo propagação de tensões **1:2**, o acréscimo na linha média de uma camada
+de espessura \(H\), situada a uma distância vertical \(h\) do ponto de
+aplicação, é:
 
-### Módulo do solo
-
-O módulo de deformabilidade inicial vem do coeficiente \(K\) de Aoki-Velloso e
-do \(N_{SPT}\) médio do perfil:
+Para a reação de ponta:
 
 \[
-E_0 = C_E \cdot K \cdot \overline{N}
+\Delta\sigma_p = \frac{4\,P_p}{\pi\left(D + h + \dfrac{H}{2}\right)^{2}}
 \]
 
-| Tipo de estaca | \(C_E\) |
-| :-- | --: |
-| Pré-moldada | 6 |
-| Hélice contínua, Franki, Ômega, Raiz | 4 |
-| Demais (escavadas) | 3 |
+onde \(D\) é o diâmetro da **base** da estaca.
 
-O módulo é então corrigido pelo nível de tensão:
+Para cada parcela de resistência lateral, aplicada no centroide do respectivo
+segmento:
+
+\[
+\Delta\sigma_i = \frac{4\,R_{Li}}{\pi\left(D + h + \dfrac{H}{2}\right)^{2}}
+\]
+
+onde \(D\) é o diâmetro do **fuste**. O acréscimo total na camada é
+
+\[
+\Delta\sigma = \Delta\sigma_p + \sum \Delta\sigma_i
+\]
+
+!!! info "Todas as parcelas, camada a camada"
+
+    O procedimento se repete para **cada camada** entre a base da estaca e o
+    indeslocável. Não é uma tensão única espalhada numa área fixa: cada camada
+    recebe a contribuição da ponta **e** de todos os segmentos de fuste, cada
+    uma atenuada pela sua própria distância.
+
+### Recalque pela Teoria da Elasticidade
+
+\[
+\rho_s = \sum \left(\frac{\Delta\sigma}{E_s}\,H\right)
+\]
+
+### Módulo de deformabilidade do solo
+
+Pela expressão adaptada de **Janbu (1963)**:
 
 \[
 E_s = E_0 \left(\frac{\sigma_0 + \Delta\sigma}{\sigma_0}\right)^{n}
-\qquad\text{com}\qquad
-\sigma_0 = \gamma \cdot \frac{L}{2}
 \]
 
-O expoente \(n\) distingue o comportamento dos solos:
-
-| Solo dominante | \(n\) | Significado |
-| :-- | :-: | :-- |
-| Areia (código 1) | 0,5 | Módulo **cresce** com a tensão de confinamento |
-| Silte e argila (2 e 3) | 0 | Módulo praticamente independente do confinamento |
-
-O peso específico \(\gamma\) é buscado em tabela por \(\overline{N}\) e
-natureza do solo; na falta de correspondência, adota-se 18 kN/m³.
-
-### Recalque
+| Símbolo | Significado |
+| :-- | :-- |
+| \(E_0\) | Módulo do solo **antes** da execução da estaca |
+| \(\sigma_0\) | Tensão geostática **no centro da camada** |
+| \(n\) | Expoente que depende da natureza do solo |
 
 \[
-\rho_S = \frac{\Delta\sigma}{E_s} \cdot L^{\,n}
+n =
+\begin{cases}
+0{,}5 & \text{materiais granulares} \\
+0 & \text{argilas duras e rijas}
+\end{cases}
 \]
 
----
+Em areia, o módulo cresce com o acréscimo de tensões; em argila, não — e é isso
+que o expoente traduz.
 
-## Recalque de grupo
+Para \(E_0\), Aoki (1984) considera:
 
-Estacas próximas interagem: os bulbos de tensão se superpõem, e o grupo recalca
-mais que a estaca isolada mais carregada. O SPX usa a formulação simplificada
-de **Fleming (1985)** e **Poulos (1993)**:
+| Tipo de estaca | \(E_0\) |
+| :-- | :-- |
+| Cravadas | \(6 \, K \, N_{SPT}\) |
+| Hélice contínua | \(4 \, K \, N_{SPT}\) |
+| Escavadas | \(3 \, K \, N_{SPT}\) |
 
-\[
-\rho_{grupo} = \rho_{max} \cdot \sqrt{n}
-\]
-
-onde \(\rho_{max}\) é o maior recalque individual do bloco e \(n\) o número de
-estacas.
-
-!!! warning validade "Simplificação deliberada"
-
-    A raiz do número de estacas é uma aproximação grosseira: ela **não**
-    considera espaçamento, arranjo, rigidez do bloco nem a posição relativa das
-    estacas. Um grupo com espaçamento de 6D interage muito menos que um de 2,5D,
-    e a fórmula dá o mesmo fator para os dois.
-
-    Use-a como ordem de grandeza. Para grupos grandes, muito carregados ou com
-    espaçamento apertado, uma análise de interação específica é o caminho.
+com \(K\) o coeficiente empírico do método
+[Aoki-Velloso](capacidade-de-carga.md#aoki-velloso-1975), função do tipo de
+solo.
 
 ---
 
 ## Curva carga × recalque
 
-O SPX traça a curva pela função de **Van der Veen (1953)**:
+Aoki (1979) propõe prever a curva conhecendo **um ponto** dela, pela expressão
+de **Van der Veen (1953)**:
 
 \[
-P(\rho) = R\left(1 - e^{-a\rho}\right)
+P = R\left(1 - e^{-a\rho}\right)
 \]
 
-onde \(R\) é a resistência última (\(R_{total}\) na cota da ponta) e \(a\) é
-ajustado para que a curva passe **exatamente pelo ponto de trabalho**
-calculado:
+Calculada a capacidade de carga \(R\) e estimado o recalque \(\rho\) para uma
+carga \(P\), o parâmetro que define a forma da curva sai de:
 
 \[
-a = \frac{-\ln\!\left(1 - P/R\right)}{\rho_{projeto}}
+a = \frac{-\ln\left(1 - P/R\right)}{\rho}
 \]
 
-Isso significa que a curva **não é uma previsão independente**: ela é a
-interpolação de Van der Veen ancorada em um único ponto, o par
-(carga de projeto, recalque de Cintra & Aoki). Ela serve para visualizar a
-margem até a ruptura e a não linearidade esperada — não como substituta de
-prova de carga.
+!!! warning "A faixa em que o ponto de ancoragem vale"
 
-O gráfico é apresentado na convenção geotécnica: carga no eixo horizontal, no
-topo, e recalque crescendo para baixo.
+    A carga usada para ancorar a curva deve estar entre a resistência lateral e
+    metade da capacidade:
+
+    \[
+    R_L < P \le \frac{R}{2}
+    \]
+
+    É a mesma condição das hipóteses do encurtamento elástico — todo o atrito
+    mobilizado, e a ponta ainda longe da ruptura. Fora dela, a curva deixa de
+    representar o comportamento.
+
+A curva **não é uma previsão independente**: é a interpolação de Van der Veen
+ancorada em um único ponto. Serve para visualizar a margem até a ruptura e a
+não linearidade esperada, não como substituta de prova de carga.
 
 ---
 
-## Diagrama de esforço normal
+## Efeito de grupo
 
-Complementando, o programa traça a força normal ao longo do fuste:
+Grupos de estacas **sempre** recalcam mais que a estaca isolada sob a mesma
+carga:
 
 \[
-P(z) = P_{topo} - R_l(z)
+\rho_g = \alpha \, \rho_i
 \]
 
-truncado em zero. É a leitura direta de quanto da carga já foi transferida ao
-solo por atrito em cada profundidade — e mostra visualmente se a estaca
-trabalha por atrito ou por ponta.
+Valores experimentais apontam \(\alpha\) entre **1,6 e 4,0**, dependendo do
+tamanho e da forma do grupo, para modelos de estacas cravadas em areia
+medianamente compacta (Cintra, 1987).
+
+!!! warning validade "As fórmulas geométricas não são confiáveis"
+
+    Fórmulas de literatura que estimam \(\alpha\) **apenas por parâmetros
+    geométricos do grupo** não são confiáveis: as variáveis mais importantes
+    são a **deformabilidade do estrato entre a base das estacas e o
+    indeslocável** e a **espessura desse estrato** — nenhuma das duas aparece
+    na geometria.
+
+    Há caso de obra em que grupos grandes recalcaram o mesmo que uma estaca
+    isolada, porque as estacas estavam próximas do indeslocável.
+
+    O SPX aplica a estimativa simplificada \(\rho_g = \rho_{max}\sqrt{n}\), que
+    é uma dessas fórmulas geométricas. **Trate o resultado como ordem de
+    grandeza.** Para grupos grandes ou críticos, o método mais abrangente é o
+    de Aoki & Lopes (1975), que considera a interação entre todos os elementos.
+
+### Recalque admissível
+
+Para fundações usuais por estacas, os valores de **Meyerhof (1976)**:
+
+| Solo | Recalque admissível |
+| :-- | --: |
+| Areia | 25 mm |
+| Argila | 50 mm |
 
 ---
 
@@ -169,13 +246,16 @@ trabalha por atrito ou por ponta.
 
 !!! warning validade "Faixa de aplicação"
 
-    - O método estima o recalque **imediato**. Em argilas saturadas, o
+    - O método estima o recalque **imediato**. Em argilas saturadas o
       adensamento continua por anos e **não** está contemplado.
-    - A estimativa depende de \(K\) e \(N_{SPT}\), com a dispersão própria de
-      correlação empírica. Trate o resultado como ordem de grandeza, não como
-      previsão de precisão milimétrica.
-    - O recalque **admissível** é atributo da estrutura, não da fundação. O
-      programa não decide se o valor calculado é aceitável.
+    - As hipóteses do encurtamento elástico exigem \(R_L < P < R\) com **todo o
+      atrito mobilizado**. Para cargas abaixo de \(R_L\), o diagrama de normal
+      é outro e o cálculo superestima o encurtamento.
+    - \(E_0\) vem de correlação com \(N_{SPT}\), com a dispersão própria de
+      método empírico. Trate o resultado como ordem de grandeza.
+    - A posição do **indeslocável** governa \(\rho_s\): sem saber onde ele
+      está, não há como delimitar as camadas que se comprimem.
+    - O recalque **admissível** é atributo da estrutura, não da fundação.
     - Recalques **diferenciais** entre apoios — que são o que de fato danifica
       estruturas — exigem comparar as fundações entre si, e não estão no escopo
       da análise de estaca isolada.

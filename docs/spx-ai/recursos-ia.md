@@ -29,13 +29,13 @@ mescladas e descrições fora do padrão.
     leituras erradas — e uma leitura errada **não se anuncia**.
 
     Confira a tabela resultante contra o laudo original, com atenção especial
-    ao **código de solo**: é ele que seleciona \(K\) e \(\alpha\) de
+    à **classificação do solo**: é ela que seleciona \(K\) e \(\alpha\) de
     Aoki-Velloso, \(C\) de Décourt-Quaresma, \(\alpha_T\) de Teixeira e o fator
     \(m\) das molas.
 
-    Trocar `12` por `21` — areia siltosa por silte arenoso — reduz \(K\) de 800
-    para 550 kPa, **31 % a menos de resistência de ponta**. Ver
-    [convenções](../comecar/convencoes.md#codigos-de-solo).
+    Trocar **areia siltosa** por **silte arenoso** reduz \(K\) de 0,80
+    para 0,55 MPa, **31 % a menos de resistência de ponta**. Ver
+    [convenções](../comecar/convencoes.md#tipos-de-solo).
 
 A tabela extraída é **editável**: corrija o que estiver errado antes de
 calcular.

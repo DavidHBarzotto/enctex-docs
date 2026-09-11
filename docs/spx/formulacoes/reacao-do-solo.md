@@ -26,8 +26,8 @@ com \(K_h\) em kN/m³, \(z\) em metros e \(m\) em **kN/m⁴**. O coeficiente \(m
 
 | Solo dominante | Tabela usada |
 | :-- | :-- |
-| Areia (1) e silte (2) | Tabela de \(m\) para areias |
-| Argila (3) | Tabela de \(m\) para argilas |
+| Solos arenosos e siltosos | Tabela de \(m\) para areias |
+| Solos argilosos | Tabela de \(m\) para argilas |
 
 Fora da faixa tabelada, o valor é saturado no extremo mais próximo — \(N\)
 acima do máximo usa o último valor, \(N\) abaixo do mínimo usa o primeiro. Solo
