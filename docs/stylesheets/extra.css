@@ -583,3 +583,49 @@
     display: none;
   }
 }
+
+/* -- o seletor de idioma ---------------------------------------------------
+ *
+ * Grupo segmentado PT · EN · ES, como no site -- e não o botão com ícone de
+ * tradução que o Material entrega. Medidas lidas de lá: grupo com borda de
+ * 1 px em #1a2c30, raio 2 px e 2 px de intervalo; itens em JetBrains Mono de
+ * 11 px com 4/8 de padding; o ativo em fundo claro sobre texto escuro.
+ */
+.md-header__option .ex-idiomas {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  margin-left: 12px;
+  border: 1px solid var(--ex-borda);
+  border-radius: 2px;
+  overflow: hidden;
+  background: transparent;
+}
+
+.ex-idioma {
+  padding: 4px 8px;
+  font-family: "JetBrains Mono", ui-monospace, monospace;
+  font-size: 11px;
+  font-weight: 400;
+  line-height: 1.5;
+  text-transform: uppercase;
+  color: var(--ex-texto-fraco);
+  transition: color 0.2s, background-color 0.2s;
+}
+
+.ex-idioma:hover {
+  color: var(--ex-texto);
+}
+
+.ex-idioma--ativo,
+.ex-idioma--ativo:hover {
+  background: var(--ex-texto);
+  color: var(--ex-fundo);
+}
+
+/* Na gaveta, o seletor sai junto com o menu e o botão. */
+@media screen and (max-width: 76.234375em) {
+  .md-header__option .ex-idiomas {
+    display: none;
+  }
+}

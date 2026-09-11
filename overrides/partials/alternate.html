@@ -1,0 +1,30 @@
+{#-
+  Seletor de idioma no estilo do enctex.com.br.
+
+  O Material entrega um botão com o ícone de tradução que abre uma lista. O
+  site usa um grupo segmentado -- PT · EN · ES, com o ativo em fundo claro --,
+  e é ele que o visitante já conhece.
+
+  Medidas lidas do site: grupo com borda de 1 px em #1a2c30, raio 2 px e 2 px
+  de intervalo; itens em JetBrains Mono de 11 px, 4/8 de padding.
+
+  `alt.lang` vem em minúsculas (`pt`, `en`, `es`) e o maiúsculo é feito no CSS,
+  por `text-transform` -- como no site.
+-#}
+<div class="md-header__option">
+  <div class="ex-idiomas" role="group" aria-label="{{ lang.t('select.language') }}">
+    {% for alt in config.extra.alternate %}
+      {#- O plugin de i18n aponta o idioma CORRENTE para "./"; é o marcador
+          mais confiável de qual está ativo, porque não depende de como o
+          locale do tema foi escrito (pt x pt-BR). -#}
+      {% set ativo = alt.link in ("./", ".") or alt.lang == config.theme.language %}
+      <a
+        class="ex-idioma{% if ativo %} ex-idioma--ativo{% endif %}"
+        href="{{ alt.link | url }}"
+        hreflang="{{ alt.lang }}"
+        title="{{ alt.name }}"
+        {% if ativo %}aria-current="true"{% endif %}
+      >{{ alt.lang }}</a>
+    {% endfor %}
+  </div>
+</div>
