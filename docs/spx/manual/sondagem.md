@@ -74,7 +74,7 @@ estacas próximas receberam comprimentos diferentes.
 
 Terceira aba. Traz os parâmetros por camada — pesos específicos e o que mais
 alimenta a tensão geostática usada no
-[recalque](../formulacoes/recalque.md#parcela-do-solo).
+[recalque](../formulacoes/recalque.md#recalque-do-solo).
 
 O programa oferece uma tabela de **pesos específicos típicos** por consistência
 e compacidade, acessível pela própria aba, para quem não tem ensaio.

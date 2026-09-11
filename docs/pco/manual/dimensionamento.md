@@ -45,8 +45,24 @@ Blévot para o mesmo bloco.
 
 Disponível quando o modelo é Blévot: **0,90** ou **0,95**.
 
-É o coeficiente que pondera a contribuição da dimensão do pilar na fórmula do
-tirante. O valor menor é o conservador — resulta em mais armadura.
+É o coeficiente que leva em conta a **perda de resistência do concreto ao longo
+do tempo devida a cargas permanentes — o efeito Rüsch**. Ele entra no limite de
+tensão das bielas:
+
+\[
+\sigma_{cd,b,lim} = lpha_{lim}\,K_R\,f_{cd}
+\]
+
+com \(lpha_{lim}\) igual a 1,4, 1,75 ou 2,1 conforme o bloco tenha duas,
+três, ou quatro e mais estacas.
+
+!!! info "Ele não mexe na armadura"
+
+    \(K_R\) atua **só sobre o limite de tensão**, não sobre a força do
+    tirante. Adotar 0,90 é a escolha conservadora: torna a verificação da biela
+    mais restritiva, sem alterar a área de aço calculada.
+
+    Ver [Blévot & Frémy](../formulacoes/blevot.md#o-limite-e-o-coeficiente-kr).
 
 ## Modelo (apenas flexível)
 
