@@ -56,22 +56,6 @@
   --md-footer-bg-color--dark: #000a0d;
 }
 
-/* -- a barra superior ------------------------------------------------------
- *
- * No site ela é quase preta com uma borda fina embaixo, e não um bloco de cor
- * saturada. O Material pinta a barra com a cor primária; aqui a primária É o
- * fundo, e a separação vem da borda.
- */
-[data-md-color-scheme="slate"] .md-header {
-  border-bottom: 1px solid var(--ex-borda);
-  box-shadow: none;
-}
-
-.md-header__title {
-  font-family: var(--ex-titulo);
-  font-weight: 600;
-}
-
 /* -- títulos ---------------------------------------------------------------
  *
  * Space Grotesk, com o peso alto e o entrelinhamento curto da página inicial.
@@ -326,34 +310,6 @@
   text-transform: uppercase;
 }
 
-/* -- barra de abas ---------------------------------------------------------
- *
- * No site, o item de menu inativo é cinza-azulado e o ativo é branco. O
- * Material entrega 0,7 de opacidade para o inativo, o que sobre fundo quase
- * preto fica no limite da legibilidade -- em tela de notebook, some.
- */
-[data-md-color-scheme="slate"] .md-tabs__link {
-  opacity: 1;
-  color: var(--ex-texto-fraco);
-  transition: color 0.2s;
-}
-
-[data-md-color-scheme="slate"] .md-tabs__link:hover,
-[data-md-color-scheme="slate"] .md-tabs__link--active {
-  color: var(--ex-texto);
-}
-
-[data-md-color-scheme="slate"] .md-tabs__item--active .md-tabs__link {
-  color: var(--ex-primaria);
-}
-
-/* O logotipo tem fundo transparente; sobre a barra escura ele aparece inteiro. */
-.md-header__button.md-logo img,
-.md-header__button.md-logo svg {
-  height: 1.4rem;
-  width: auto;
-}
-
 /* -- a barra do cabeçalho --------------------------------------------------
  *
  * Todas as medidas abaixo foram LIDAS da barra do enctex.com.br, não
@@ -363,7 +319,8 @@
  * A versão anterior tinha a proporção errada -- barra baixa demais, marca
  * pequena demais -- porque eu havia escolhido os valores em vez de medi-los.
  */
-.md-header {
+.md-header,
+[data-md-color-scheme="slate"] .md-header {
   background: transparent;
   box-shadow: none;
   border-bottom: none;
