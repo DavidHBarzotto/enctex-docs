@@ -144,6 +144,8 @@ plugins:
             O que muda no SPO: What changes in SPO
             Recursos de IA: AI features
             Blévot & Frémy: Blévot & Frémy
+            Fórmulas por arranjo: Fórmulas por disposición
+            Fórmulas por arranjo: Formulas by arrangement
             MBT (Bielas e Tirantes): STM (Strut and Tie)
             Elementos finitos: Finite elements
             Combinação de ações: Load combinations
@@ -229,6 +231,7 @@ nav:
       - Formulações:
           - pco/formulacoes/index.md
           - Blévot & Frémy: pco/formulacoes/blevot.md
+          - Fórmulas por arranjo: pco/formulacoes/arranjos.md
           - MBT (Bielas e Tirantes): pco/formulacoes/mbt.md
           - Elementos finitos: pco/formulacoes/elementos-finitos.md
           - Combinação de ações: pco/formulacoes/combinacoes.md

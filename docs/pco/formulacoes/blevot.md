@@ -62,6 +62,13 @@ R_c = \frac{N}{2\sin\alpha}
     Em blocos sobre **três ou mais** estacas, decompõe-se \(F_{td}\) nas
     direções das armaduras.
 
+!!! tip "As fórmulas de cada arranjo"
+
+    Este capítulo desenvolve o bloco sobre duas estacas, que é onde a geometria
+    aparece mais clara. As expressões fechadas para **três a sete estacas** —
+    com os respectivos intervalos de altura útil, limites de tensão e armaduras
+    — estão em [Fórmulas por arranjo](arranjos.md).
+
 ---
 
 ## Altura útil

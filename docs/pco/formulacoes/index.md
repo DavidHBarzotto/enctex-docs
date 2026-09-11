@@ -47,8 +47,15 @@ O critério de rigidez está em [Verificações](verificacoes.md#rigidez-do-bloc
 
     ---
 
-    O método clássico, com fórmula fechada para os arranjos de 3 a 6 estacas e
-    projeção geral para os demais.
+    O método clássico: a treliça interna, a verificação das bielas, o fator
+    1,15 e as armaduras complementares da norma.
+
+-   **[Fórmulas por arranjo](arranjos.md)**
+
+    ---
+
+    As expressões fechadas de duas a sete estacas, com altura útil, limites de
+    tensão, armaduras principais e complementares.
 
 -   **[MBT — Bielas e Tirantes](mbt.md)**
 
