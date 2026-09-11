@@ -18,7 +18,7 @@ relação **parábola-retângulo** da NBR 6118, que é a curva real:
 \sigma_c =
 \begin{cases}
 0{,}85\,f_{cd}\left[1 - \left(1 - \dfrac{\varepsilon_c}{\varepsilon_{c2}}\right)^{n}\right]
-  & 0 \le \varepsilon_c \le \varepsilon_{c2} \[10pt]
+  & 0 \le \varepsilon_c \le \varepsilon_{c2} \\[10pt]
 0{,}85\,f_{cd} & \varepsilon_{c2} < \varepsilon_c \le \varepsilon_{cu}
 \end{cases}
 \]

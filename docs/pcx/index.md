@@ -1,6 +1,6 @@
 # PCX — Pile Cap X
 
-**Versão 1.0.0** · Windows 64 bits
+**Versão 1.0.1** · Windows 64 bits
 
 Evolução do [PCO](../pco/index.md) para projetos mais complexos, incluindo o
 cálculo de **blocos flexíveis**.

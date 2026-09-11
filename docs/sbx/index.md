@@ -1,6 +1,6 @@
 # SBX — Simple Beam X
 
-**Versão 1.0** · Windows 64 bits · **Gratuito**
+**Versão 1.0.1** · Windows 64 bits · **Gratuito**
 
 Tudo o que o [SBO](../sbo/index.md) faz, com um acréscimo: em vez de apenas
 verificar a seção que você informou, o SBX **encontra a seção mais barata** que

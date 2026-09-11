@@ -1,6 +1,6 @@
 # SBO — Simple Beam One
 
-**Versão 1.0** · Windows 64 bits · **Gratuito**
+**Versão 1.0.1** · Windows 64 bits · **Gratuito**
 
 Dimensionamento de vigas de concreto armado à **flexão simples**, **esforço
 cortante** e **torção**, com detalhamento da seção e diagrama

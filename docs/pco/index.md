@@ -1,6 +1,6 @@
 # PCO — Pile Cap One
 
-**Versão 1.0.0** · Windows 64 bits
+**Versão 1.0.1** · Windows 64 bits
 
 Plataforma para cálculo, dimensionamento e detalhamento de blocos de fundação
 sobre estacas, conforme as normas técnicas brasileiras.
