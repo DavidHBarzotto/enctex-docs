@@ -340,9 +340,13 @@
 
 /* -- a marca ---------------------------------------------------------------
  *
- * 28 x 28, como no site. O glifo vem recortado sem a moldura do arquivo
- * original e o quadradinho branco é feito aqui -- um arredondamento só, e
- * folga igual nos quatro lados.
+ * 28 x 28 com raio de 2 px, exatamente como no site -- que usa a MESMA arte,
+ * inteira, sem recorte.
+ *
+ * Nada de ladrilho branco montado aqui: a arte já traz o seu quadrado
+ * arredondado e a sua margem. Recortar o glifo e esticá-lo até as bordas
+ * deixava a marca ampliada -- deixava de ser o ícone da EnCteX e virava um
+ * zoom dele.
  */
 .md-header__button.md-logo {
   margin: 0;
@@ -352,10 +356,7 @@
 .md-header__button.md-logo img {
   height: 28px;
   width: 28px;
-  padding: 3px;
-  border-radius: 6px;
-  background: #ffffff;
-  object-fit: contain;
+  border-radius: 2px;
 }
 
 /* -- o nome ----------------------------------------------------------------
