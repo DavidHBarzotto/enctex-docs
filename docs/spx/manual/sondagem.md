@@ -28,8 +28,8 @@ quinze combinações ao todo:
 
 !!! warning "A classificação escolhe os parâmetros de cálculo"
 
-    Não é rótulo. É ela que seleciona \(K\) e \(lpha\) de Aoki-Velloso,
-    \(C\) de Décourt-Quaresma, \(lpha_T\) de Teixeira e o fator \(m\) das
+    Não é rótulo. É ela que seleciona \(K\) e \(\alpha\) de Aoki-Velloso,
+    \(C\) de Décourt-Quaresma, \(\alpha_T\) de Teixeira e o fator \(m\) das
     molas.
 
     Trocar **areia siltosa** por **silte arenoso** reduz \(K\) de 0,80 para

@@ -1,130 +1,170 @@
 /* Documentação EnCteX — identidade do enctex.com.br sobre o tema Material.
  *
- * As cores e as fontes não foram escolhidas aqui: foram lidas do site, das
- * variáveis que ele já publica (--background, --primary, --brand-teal…). Quem
- * sai da página institucional para a documentação não deve sentir que trocou
- * de empresa.
+ * O site foi redesenhado (out/2026) no estilo da Bentley: fundo quase branco,
+ * texto grafite, teal como cor de destaque, Inter em tudo com tracking bem
+ * apertado nos títulos, botões em pílula e menu em vidro claro. Os valores
+ * abaixo são os do site, convertidos de oklch para sRGB. Quem sai da página
+ * institucional para a documentação não deve sentir que trocou de empresa.
  */
 
-@import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Sora:wght@500;600;700&display=swap");
-
 :root {
-  /* Tokens do site, resolvidos para sRGB. */
-  --ex-fundo: #011014;
-  --ex-superficie: #03171c;
-  --ex-superficie-2: #06292f;
-  --ex-borda: #1a2c30;
-  --ex-texto: #ecf3f4;
-  --ex-texto-fraco: #7e9498;
-  --ex-primaria: #3fc0c0;   /* ciano claro: links e destaques */
-  --ex-teal: #1e9b82;       /* teal da marca */
-  --ex-azul: #0079ba;       /* azul da marca */
-  --ex-profundo: #003649;
-  --ex-raio: 0.375rem;      /* --radius do site */
+  --ex-fundo: #fcfdfe;
+  --ex-superficie: #ffffff;
+  --ex-superficie-2: #f1f4f6;
+  --ex-borda: #dee2e4;
+  --ex-texto: #121416;
+  --ex-texto-fraco: #4e5359;
+  --ex-primaria: #04837c;      /* teal da marca (botões, links, destaques) */
+  --ex-primaria-escura: #005b57;
+  --ex-raio: 0.4rem;       /* 8 px: no Material, 1rem = 20 px */
+  --ex-raio-grande: 0.8rem; /* 16 px */
 
-  --ex-titulo: "Space Grotesk", "Inter", system-ui, sans-serif;
-  /* A palavra da marca usa outra fonte que os titulos: Sora. */
-  --ex-marca: "Sora", "Inter", system-ui, sans-serif;
-  --ex-gradiente: linear-gradient(135deg, #1e9b82 0%, #0079ba 100%);
+  --ex-fonte: "Inter", system-ui, sans-serif;
+  --ex-mono: "JetBrains Mono", ui-monospace, monospace;
+
+  /* Variáveis usadas pelo desenho da ponte (mesmos nomes do site). */
+  --background: var(--ex-fundo);
+  --foreground: var(--ex-texto);
+  --card: var(--ex-superficie);
+  --border: var(--ex-borda);
+  --primary: var(--ex-primaria);
+  --muted-foreground: var(--ex-texto-fraco);
 }
 
-/* -- tema escuro, que é o padrão ------------------------------------------- */
-[data-md-color-scheme="slate"] {
-  --md-hue: 195;
-
+/* -- tema claro, que é o padrão -------------------------------------------- */
+[data-md-color-scheme="default"] {
   --md-default-bg-color: var(--ex-fundo);
-  --md-default-bg-color--light: var(--ex-superficie);
-  --md-default-bg-color--lighter: var(--ex-superficie-2);
-
   --md-default-fg-color: var(--ex-texto);
   --md-default-fg-color--light: var(--ex-texto-fraco);
   --md-default-fg-color--lighter: var(--ex-borda);
-  --md-default-fg-color--lightest: #0d2026;
+  --md-default-fg-color--lightest: var(--ex-superficie-2);
 
-  --md-primary-fg-color: var(--ex-fundo);
-  --md-primary-fg-color--dark: #000a0d;
-  --md-primary-bg-color: var(--ex-texto);
+  --md-primary-fg-color: var(--ex-primaria);
+  --md-primary-fg-color--light: #2a9e98;
+  --md-primary-fg-color--dark: var(--ex-primaria-escura);
+  --md-primary-bg-color: #ffffff;
 
-  --md-accent-fg-color: var(--ex-primaria);
+  --md-accent-fg-color: var(--ex-primaria-escura);
+  --md-accent-fg-color--transparent: rgba(4, 131, 124, 0.1);
 
   --md-typeset-color: var(--ex-texto);
   --md-typeset-a-color: var(--ex-primaria);
-  --md-code-bg-color: var(--ex-superficie);
-  --md-code-fg-color: #cfe6e8;
+  --md-code-bg-color: var(--ex-superficie-2);
+  --md-code-fg-color: #1f2a2e;
 
-  --md-footer-bg-color: #000a0d;
-  --md-footer-bg-color--dark: #000a0d;
+  --md-footer-bg-color: var(--ex-superficie-2);
+  --md-footer-bg-color--dark: #e7ecee;
+  --md-footer-fg-color: var(--ex-texto);
+  --md-footer-fg-color--light: var(--ex-texto-fraco);
+  --md-footer-fg-color--lighter: #7c8389;
+}
+
+body {
+  -webkit-font-smoothing: antialiased;
 }
 
 /* -- títulos ---------------------------------------------------------------
  *
- * Space Grotesk, com o peso alto e o entrelinhamento curto da página inicial.
+ * Inter 600 com tracking negativo forte, como os títulos do site.
  */
 .md-typeset h1,
 .md-typeset h2,
 .md-typeset h3,
 .md-typeset h4,
 .md-typeset h5 {
-  font-family: var(--ex-titulo);
-  font-weight: 700;
-  /* Os tres numeros medidos no h1 do enctex.com.br: peso 700, entrelinha
-     1,02 do corpo e tracking de -0,025em. E o aperto que da o bloco solido
-     do titulo da pagina inicial. */
-  letter-spacing: -0.025em;
-  color: var(--md-default-fg-color);
+  font-family: var(--ex-fonte);
+  font-weight: 600;
+  letter-spacing: -0.035em;
+  color: var(--ex-texto);
 }
 
 .md-typeset h1 {
-  line-height: 1.02;
+  font-size: 2.2em;
+  line-height: 1.05;
   margin-bottom: 0.6em;
 }
 
 .md-typeset h2 {
-  line-height: 1.08;
+  line-height: 1.1;
   margin-top: 2em;
 }
 
 .md-typeset h3,
 .md-typeset h4 {
   line-height: 1.2;
+  letter-spacing: -0.02em;
 }
 
-.md-nav__title,
-.md-tabs__link {
-  font-family: var(--ex-titulo);
+/* Título que existe para a estrutura da página, mas não aparece (a página
+   inicial mostra o título no topo grande). */
+.md-typeset .ex-oculto {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
 }
 
-/* -- superfícies -----------------------------------------------------------
+.md-typeset a {
+  text-underline-offset: 0.2em;
+}
+
+/* -- barra lateral ---------------------------------------------------------- */
+.md-nav__title {
+  font-family: var(--ex-fonte);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+.md-nav__link--active,
+.md-nav__item .md-nav__link--active {
+  color: var(--ex-primaria);
+  font-weight: 600;
+}
+
+/* -- superfícies ------------------------------------------------------------
  *
- * O site usa cartões de fundo levemente mais claro que o fundo, borda de 1 px
- * e raio pequeno. Vale para cartão, tabela, admonition e bloco de código.
+ * Cartões brancos, borda fina, cantos generosos -- e, ao passar o mouse, borda
+ * teal e uma sombra teal suave, como os cartões do site.
  */
 .md-typeset .admonition,
 .md-typeset details,
-.md-typeset .grid.cards > ul > li,
 .md-typeset pre > code,
 .md-typeset table:not([class]) {
   border-radius: var(--ex-raio);
 }
 
-[data-md-color-scheme="slate"] .md-typeset .grid.cards > ul > li {
+.md-typeset .grid.cards > ul > li {
   background: var(--ex-superficie);
   border: 1px solid var(--ex-borda);
+  border-radius: var(--ex-raio-grande);
+  padding: 1.1rem 1.2rem;
+  transition: border-color 0.2s, box-shadow 0.2s;
 }
 
-[data-md-color-scheme="slate"] .md-typeset .grid.cards > ul > li:hover {
-  border-color: var(--ex-teal);
-  box-shadow: 0 0 0 1px rgba(30, 155, 130, 0.25);
+.md-typeset .grid.cards > ul > li:hover {
+  border-color: var(--ex-primaria);
+  box-shadow: 0 8px 30px -12px rgba(4, 131, 124, 0.35);
 }
 
-[data-md-color-scheme="slate"] .md-typeset table:not([class]) {
+.md-typeset .grid.cards > ul > li > hr {
+  border-bottom-color: var(--ex-borda);
+}
+
+.md-typeset .grid.cards .lg {
+  color: var(--ex-primaria);
+}
+
+.md-typeset table:not([class]) {
   background: var(--ex-superficie);
   border: 1px solid var(--ex-borda);
+  box-shadow: none;
 }
 
-[data-md-color-scheme="slate"] .md-typeset table:not([class]) th {
+.md-typeset table:not([class]) th {
   background: var(--ex-superficie-2);
-  font-family: var(--ex-titulo);
+  font-family: var(--ex-fonte);
   font-weight: 600;
 }
 
@@ -163,17 +203,17 @@
  */
 .md-typeset .admonition.validade,
 .md-typeset details.validade {
-  border-color: #d08a1a;
+  border-color: #c27a0e;
 }
 
 .md-typeset .validade > .admonition-title,
 .md-typeset .validade > summary {
-  background-color: rgba(208, 138, 26, 0.12);
+  background-color: rgba(194, 122, 14, 0.1);
 }
 
 .md-typeset .validade > .admonition-title::before,
 .md-typeset .validade > summary::before {
-  background-color: #d08a1a;
+  background-color: #c27a0e;
   -webkit-mask-image: var(--md-admonition-icon--warning);
           mask-image: var(--md-admonition-icon--warning);
 }
@@ -184,10 +224,8 @@
  * instalada ele troca o <pre> por um <div> vazio e nunca insere o SVG -- sem
  * erro no console, o que torna a falha invisível até alguém olhar a página.
  *
- * Num site que vai para produção, um diagrama que depende de JS para existir é
- * um diagrama que pode não existir. Estes são feitos de HTML e CSS: renderizam
- * sempre, acompanham o tema claro/escuro e quebram a linha sozinhos no celular,
- * que é mais do que o SVG de largura fixa entregava.
+ * Estes são feitos de HTML e CSS: renderizam sempre e quebram a linha sozinhos
+ * no celular.
  */
 .md-typeset .fluxo {
   display: flex;
@@ -200,33 +238,33 @@
 .md-typeset .fluxo > .etapa {
   flex: 1 1 auto;
   min-width: 5.2rem;
-  padding: 0.45rem 0.6rem;
-  border: 1px solid var(--md-default-fg-color--lighter);
-  border-left: 3px solid var(--ex-teal);
+  padding: 0.5rem 0.65rem;
+  border: 1px solid var(--ex-borda);
+  border-top: 3px solid var(--ex-primaria);
   border-radius: var(--ex-raio);
-  background: var(--md-code-bg-color);
+  background: var(--ex-superficie);
   font-size: 0.7rem;
   line-height: 1.35;
 }
 
 .md-typeset .fluxo > .etapa .n {
   display: block;
-  font-family: var(--ex-titulo);
-  font-size: 0.62rem;
-  font-weight: 700;
+  font-family: var(--ex-mono);
+  font-size: 0.6rem;
+  font-weight: 500;
   color: var(--ex-primaria);
   letter-spacing: 0.06em;
 }
 
 .md-typeset .fluxo > .seta {
   align-self: center;
-  color: var(--md-default-fg-color--light);
+  color: var(--ex-texto-fraco);
   font-size: 0.9rem;
   line-height: 1;
 }
 
 .md-typeset .fluxo > .etapa.ramo {
-  border-left-color: var(--ex-azul);
+  border-top-color: var(--ex-texto-fraco);
 }
 
 /* -- cadeia de dependência -------------------------------------------------
@@ -235,17 +273,17 @@
  */
 .md-typeset .cadeia {
   margin: 1.2em 0;
-  border-left: 2px solid var(--md-default-fg-color--lighter);
+  border-left: 2px solid var(--ex-borda);
   padding-left: 0.9rem;
 }
 
 .md-typeset .cadeia > .nivel {
   position: relative;
   margin: 0 0 0.7rem;
-  padding: 0.5rem 0.7rem;
-  border: 1px solid var(--md-default-fg-color--lighter);
+  padding: 0.55rem 0.75rem;
+  border: 1px solid var(--ex-borda);
   border-radius: var(--ex-raio);
-  background: var(--md-code-bg-color);
+  background: var(--ex-superficie);
   font-size: 0.72rem;
 }
 
@@ -256,25 +294,25 @@
   top: 1rem;
   width: 0.7rem;
   height: 2px;
-  background: var(--md-default-fg-color--lighter);
+  background: var(--ex-borda);
 }
 
 .md-typeset .cadeia > .nivel strong {
-  font-family: var(--ex-titulo);
   color: var(--ex-primaria);
 }
 
 .md-typeset .cadeia > .nivel .consome {
   display: block;
   margin-top: 0.15rem;
-  color: var(--md-default-fg-color--light);
+  color: var(--ex-texto-fraco);
   font-size: 0.66rem;
 }
 
 /* -- quadro de limites do projeto ------------------------------------------
  *
- * Os números que definem o porte de projeto que cada programa comporta. Ficam
- * em destaque porque são a primeira pergunta de quem avalia a compra.
+ * Os números que definem o porte de projeto que cada programa comporta, no
+ * mesmo estilo da faixa de números do site: número grande e apertado, rótulo
+ * cinza embaixo.
  */
 .md-typeset .limites {
   display: flex;
@@ -285,68 +323,85 @@
 
 .md-typeset .limites > .limite {
   flex: 1 1 7rem;
-  padding: 0.6rem 0.7rem;
-  border: 1px solid var(--md-default-fg-color--lighter);
-  border-radius: var(--ex-raio);
-  background: var(--md-code-bg-color);
-  text-align: center;
+  padding: 0.75rem 0.85rem;
+  border: 1px solid var(--ex-borda);
+  border-radius: var(--ex-raio-grande);
+  background: var(--ex-superficie);
 }
 
 .md-typeset .limites > .limite .valor {
   display: block;
-  font-family: var(--ex-titulo);
-  font-size: 1.25rem;
-  font-weight: 700;
+  font-size: 1.5rem;
+  font-weight: 600;
+  letter-spacing: -0.04em;
   line-height: 1.1;
-  color: var(--ex-primaria);
+  color: var(--ex-texto);
 }
 
 .md-typeset .limites > .limite .rotulo {
   display: block;
-  margin-top: 0.15rem;
-  color: var(--md-default-fg-color--light);
-  font-size: 0.62rem;
-  letter-spacing: 0.03em;
-  text-transform: uppercase;
+  margin-top: 0.2rem;
+  color: var(--ex-texto-fraco);
+  font-size: 0.64rem;
 }
 
-/* -- a barra do cabeçalho --------------------------------------------------
+/* -- a barra do cabeçalho: vidro claro -------------------------------------
  *
- * Todas as medidas abaixo foram LIDAS da barra do enctex.com.br, não
- * estimadas: 56 px de altura, 24 px de recuo lateral, borda de 0,8 px em
- * branco a 10 %, fundo escuro a 40 % e cantos totalmente arredondados.
- *
- * A versão anterior tinha a proporção errada -- barra baixa demais, marca
- * pequena demais -- porque eu havia escolhido os valores em vez de medi-los.
+ * A mesma barra do site: pílula de 56 px em vidro cinza-gelo levemente teal,
+ * com reflexo na metade de cima, borda clara e sombra que a faz flutuar. Como
+ * o conteúdo da documentação sempre passa por baixo dela, fica no estado
+ * "rolando" do site (mais translúcida).
  */
 .md-header,
-[data-md-color-scheme="slate"] .md-header {
+[data-md-color-scheme="default"] .md-header {
   background: transparent;
   box-shadow: none;
   border-bottom: none;
+  color: var(--ex-texto);
 }
 
 .md-header__inner {
+  position: relative;
   align-items: center;
   gap: 0;
   height: 56px;
-  margin-top: 0.6rem;
+  margin-top: 0.75rem;
   padding: 0 24px;
-  border: 0.8px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.75);
   border-radius: 9999px;
-  background: rgba(10, 31, 36, 0.55);
-  backdrop-filter: blur(12px);
+  background: linear-gradient(180deg, rgba(236, 241, 242, 0.78), rgba(218, 227, 229, 0.66));
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.9),
+    inset 0 -1px 0 rgba(30, 70, 75, 0.14),
+    0 2px 6px rgba(18, 20, 22, 0.1),
+    0 18px 44px -14px rgba(18, 30, 40, 0.4);
+  -webkit-backdrop-filter: blur(20px) saturate(1.8);
+          backdrop-filter: blur(20px) saturate(1.8);
+}
+
+/* Reflexo na metade de cima (efeito "brilhoso"). */
+.md-header__inner::before {
+  content: "";
+  position: absolute;
+  inset: 1px 1px 50% 1px;
+  border-radius: inherit;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.55), rgba(255, 255, 255, 0));
+  pointer-events: none;
+}
+
+.md-header__inner > * {
+  position: relative;
+}
+
+.md-header .md-icon,
+.md-header__button {
+  color: var(--ex-texto);
 }
 
 /* -- a marca ---------------------------------------------------------------
  *
  * 28 x 28 com raio de 2 px, exatamente como no site -- que usa a MESMA arte,
  * inteira, sem recorte.
- *
- * Nada de ladrilho branco montado aqui: a arte já traz o seu quadrado
- * arredondado e a sua margem. Recortar o glifo e esticá-lo até as bordas
- * deixava a marca ampliada -- deixava de ser o ícone da EnCteX e virava um
- * zoom dele.
  */
 .md-header__button.md-logo {
   margin: 0;
@@ -361,22 +416,12 @@
 
 /* -- o nome ----------------------------------------------------------------
  *
- * Sora 600 de 16 px, tracking -0,4 px, pintada com o gradiente da marca
- * (teal -> azul) recortado no texto. É por isso que a cor não é uma cor: no
- * site ela também não é, e usar o ciano sólido deixava a palavra visivelmente
- * diferente da do cabeçalho institucional.
- *
  * O Material empilha DOIS rótulos aqui, ambos absolutos, e troca um pelo
- * outro conforme a rolagem. Absoluto não ocupa espaço, e a caixa nascia com
- * largura zero. Aqui só o nome do site importa -- o título da página já está
- * no H1 e na aba do navegador --, então o primeiro volta ao fluxo e o segundo
- * sai.
+ * outro conforme a rolagem. Aqui só o nome do site importa -- o título da
+ * página já está no H1 e na aba do navegador --, então o primeiro volta ao
+ * fluxo e o segundo sai.
  */
 .md-header__title {
-  /* O Material dá altura fixa e entrelinha própria a esta caixa, pensando no
-     rótulo absoluto que ela normalmente abriga. Com o rótulo de volta ao
-     fluxo, essa altura deixava o nome acima do centro da barra --
-     desalinhado do menu e da marca. Flex resolve sem depender de números. */
   display: flex;
   align-items: center;
   flex: 0 0 auto;
@@ -385,9 +430,6 @@
   line-height: 1.2;
 }
 
-/* A caixa interna do Material estica para a altura toda e encosta o rótulo no
-   topo dela -- por isso o nome ficava acima do centro mesmo com o pai
-   centrado. Centrar cada nível resolve. */
 .md-header__ellipsis {
   display: flex;
   align-items: center;
@@ -406,27 +448,19 @@
 }
 
 .md-header__title .md-header__topic:first-child .md-ellipsis {
-  font-family: var(--ex-marca);
+  font-family: var(--ex-fonte);
   font-size: 16px;
   font-weight: 600;
   letter-spacing: -0.4px;
   white-space: nowrap;
-
-  background: var(--ex-gradiente);
-  -webkit-background-clip: text;
-          background-clip: text;
-  color: transparent;
+  color: var(--ex-primaria);
 }
 
 .md-header__topic[data-md-component="header-topic"] {
   display: none;
 }
 
-/* -- o menu de produtos, dentro da barra -----------------------------------
- *
- * Inter 500 de 13 px com 8/10 de padding, cinza-azulado no inativo e branco
- * no ativo -- as medidas do menu do site.
- */
+/* -- o menu de produtos, dentro da barra ----------------------------------- */
 .md-header__inner .ex-tabs {
   display: flex;
   align-items: center;
@@ -437,6 +471,7 @@
   border: none;
   background: transparent;
   box-shadow: none;
+  color: var(--ex-texto);
   scrollbar-width: none;
 }
 
@@ -446,8 +481,6 @@
 
 .md-header__inner .ex-tabs .md-tabs__list {
   display: flex;
-  /* Sem largura total, a lista encolhe para o tamanho dos itens e o
-     alinhamento não tem espaço onde acontecer: o menu colava no nome. */
   width: 100%;
   justify-content: center;
   align-items: center;
@@ -465,7 +498,7 @@
   margin: 0;
   padding: 8px 10px;
   opacity: 1;
-  font-family: "Inter", system-ui, sans-serif;
+  font-family: var(--ex-fonte);
   font-size: 13px;
   font-weight: 500;
   line-height: 1.2;
@@ -482,41 +515,35 @@
   font-weight: 600;
 }
 
-/* -- a busca ---------------------------------------------------------------
- *
- * O Material dá à busca um campo largo com fundo próprio, que dentro de uma
- * barra em pílula vira um retângulo atravessado no meio dela. Aqui ela fica
- * discreta, na altura da barra.
- */
+/* -- a busca ---------------------------------------------------------------- */
 .md-header__inner .md-search__form {
   height: 32px;
-  border-radius: 6px;
-  background: rgba(255, 255, 255, 0.05);
+  border-radius: 9999px;
+  background: rgba(255, 255, 255, 0.55);
+  box-shadow: inset 0 0 0 1px rgba(18, 20, 22, 0.06);
 }
 
 .md-header__inner .md-search__form:hover {
-  background: rgba(255, 255, 255, 0.09);
+  background: rgba(255, 255, 255, 0.8);
 }
 
 .md-header__inner .md-search__input {
   font-size: 13px;
+  color: var(--ex-texto);
 }
 
-.md-header__inner .md-search__input::placeholder {
+.md-header__inner .md-search__input::placeholder,
+.md-header__inner .md-search__icon {
   color: var(--ex-texto-fraco);
 }
 
-/* -- o botão de contato ----------------------------------------------------
- *
- * Inter 500 de 13 px, borda de 1 px em teal escuro, raio de 2 px e 6/12 de
- * padding -- as medidas do "Fale Conosco" do site.
- */
+/* -- o botão de contato ---------------------------------------------------- */
 .ex-cta {
   flex-shrink: 0;
   margin-left: 12px;
-  padding: 6px 12px;
-  border: 1px solid #194d4d;
-  border-radius: 2px;
+  padding: 7px 14px;
+  border: 1px solid rgba(4, 131, 124, 0.45);
+  border-radius: 9999px;
   color: var(--ex-primaria);
   font-size: 13px;
   font-weight: 500;
@@ -527,7 +554,7 @@
 
 .ex-cta:hover {
   border-color: var(--ex-primaria);
-  background: rgba(63, 192, 192, 0.1);
+  background: rgba(4, 131, 124, 0.08);
 }
 
 /* -- tela estreita ---------------------------------------------------------
@@ -540,29 +567,29 @@
   .ex-cta {
     display: none;
   }
+
+  .md-header__inner {
+    margin-left: 0.6rem;
+    margin-right: 0.6rem;
+    padding: 0 12px;
+  }
 }
 
-/* -- o seletor de idioma ---------------------------------------------------
- *
- * Grupo segmentado PT · EN · ES, como no site -- e não o botão com ícone de
- * tradução que o Material entrega. Medidas lidas de lá: grupo com borda de
- * 1 px em #1a2c30, raio 2 px e 2 px de intervalo; itens em JetBrains Mono de
- * 11 px com 4/8 de padding; o ativo em fundo claro sobre texto escuro.
- */
+/* -- o seletor de idioma: PT · EN · ES, como no site ----------------------- */
 .md-header__option .ex-idiomas {
   display: flex;
   align-items: center;
   gap: 2px;
   margin-left: 12px;
   border: 1px solid var(--ex-borda);
-  border-radius: 2px;
+  border-radius: 4px;
   overflow: hidden;
-  background: transparent;
+  background: rgba(255, 255, 255, 0.5);
 }
 
 .ex-idioma {
   padding: 4px 8px;
-  font-family: "JetBrains Mono", ui-monospace, monospace;
+  font-family: var(--ex-mono);
   font-size: 11px;
   font-weight: 400;
   line-height: 1.5;
@@ -578,12 +605,178 @@
 .ex-idioma--ativo,
 .ex-idioma--ativo:hover {
   background: var(--ex-texto);
-  color: var(--ex-fundo);
+  color: #ffffff;
 }
 
-/* Na gaveta, o seletor sai junto com o menu e o botão. */
 @media screen and (max-width: 76.234375em) {
   .md-header__option .ex-idiomas {
     display: none;
   }
+}
+
+/* -- rodapé ----------------------------------------------------------------- */
+.md-footer-meta {
+  background: var(--ex-superficie-2);
+  border-top: 1px solid var(--ex-borda);
+}
+
+.md-footer-meta,
+.md-footer-meta .md-copyright,
+.md-footer-meta .md-social__link {
+  color: var(--ex-texto-fraco);
+}
+
+.md-footer-meta .md-social__link:hover {
+  color: var(--ex-primaria);
+}
+
+/* ===========================================================================
+ * Página inicial: o topo com o desenho da ponte estaiada
+ * ======================================================================== */
+
+.ex-hero {
+  position: relative;
+  overflow: hidden;
+  min-height: 34rem;
+  margin-top: -4.5rem; /* passa por baixo da barra em vidro */
+  border-bottom: 1px solid var(--ex-borda);
+  background: var(--ex-fundo);
+}
+
+.ex-hero__desenho {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 72%;
+  transform: translate(6%, 2.5rem);
+}
+
+.ex-hero__desenho .ex-ponte {
+  width: 100%;
+  height: 100%;
+}
+
+.ex-hero__veu {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(180deg, var(--ex-fundo) 0%, rgba(252, 253, 254, 0.9) 30%, rgba(252, 253, 254, 0) 60%),
+    linear-gradient(90deg, rgba(252, 253, 254, 0.92) 0%, rgba(252, 253, 254, 0) 55%);
+  -webkit-mask-image: linear-gradient(180deg, #000 60%, transparent 78%);
+          mask-image: linear-gradient(180deg, #000 60%, transparent 78%);
+}
+
+.ex-hero__conteudo {
+  position: relative;
+  padding-top: 8.5rem;
+  padding-bottom: 2rem;
+}
+
+.ex-hero__titulo {
+  max-width: 40rem;
+  margin: 0;
+  font-size: 2.6rem;
+  font-weight: 600;
+  line-height: 1.04;
+  letter-spacing: -0.045em;
+  color: var(--ex-texto);
+}
+
+.ex-hero__texto {
+  max-width: 34rem;
+  margin: 1.1rem 0 0;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: var(--ex-texto-fraco);
+}
+
+.ex-hero__botoes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin-top: 1.6rem;
+}
+
+.ex-botao {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.6rem 1.2rem;
+  border: 1px solid rgba(18, 20, 22, 0.2);
+  border-radius: 9999px;
+  background: var(--ex-fundo);
+  color: var(--ex-texto);
+  font-size: 0.72rem;
+  font-weight: 500;
+  transition: border-color 0.2s, background-color 0.2s;
+}
+
+.ex-botao:hover {
+  border-color: rgba(18, 20, 22, 0.5);
+  color: var(--ex-texto);
+}
+
+.ex-botao--primario {
+  border-color: var(--ex-primaria);
+  background: var(--ex-primaria);
+  color: #ffffff;
+}
+
+.ex-botao--primario:hover {
+  background: var(--ex-primaria-escura);
+  border-color: var(--ex-primaria-escura);
+  color: #ffffff;
+}
+
+/* Celular: o desenho vai para baixo do texto, sem véu. */
+@media screen and (max-width: 44.984375em) {
+  .ex-hero {
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+  }
+
+  .ex-hero__desenho {
+    position: relative;
+    order: 2;
+    height: 15rem;
+    transform: none;
+  }
+
+  .ex-hero__veu {
+    display: none;
+  }
+
+  .ex-hero__conteudo {
+    padding-top: 6.5rem;
+  }
+
+  .ex-hero__titulo {
+    font-size: 2rem;
+  }
+}
+
+/* -- animação do desenho (a mesma do site, ~40% mais rápida que a original) -- */
+.font-mono {
+  font-family: var(--ex-mono);
+}
+
+.tracar {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  animation: ex-tracar 1.32s cubic-bezier(0.65, 0, 0.35, 1) forwards;
+}
+
+.surgir {
+  opacity: 0;
+  animation: ex-surgir 0.6s ease forwards;
+}
+
+@keyframes ex-tracar { to { stroke-dashoffset: 0; } }
+@keyframes ex-surgir { to { opacity: 1; } }
+
+@media (prefers-reduced-motion: reduce) {
+  .tracar { animation: none; stroke-dashoffset: 0; }
+  .surgir { animation: none; opacity: 1; }
 }

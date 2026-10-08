@@ -84,8 +84,8 @@ silte, depois argila.
 
 !!! warning "A classificação escolhe os parâmetros de cálculo"
 
-    O tipo de solo não é rótulo: é ela que seleciona \(K\) e \(lpha\) na
-    tabela de Aoki-Velloso, \(C\) na de Décourt-Quaresma, \(lpha_T\) na de
+    O tipo de solo não é rótulo: é ela que seleciona \(K\) e \(\alpha\) na
+    tabela de Aoki-Velloso, \(C\) na de Décourt-Quaresma, \(\alpha_T\) na de
     Teixeira e o fator \(m\) das molas.
 
     Trocar **areia siltosa** por **silte arenoso** — nomes parecidos,

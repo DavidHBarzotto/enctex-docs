@@ -1,10 +1,16 @@
 ---
 title: Documentação EnCteX
+template: home.html
+hide:
+  - navigation
+  - toc
+hero_titulo: Documentação técnica dos programas EnCteX.
+hero_texto: Manuais de uso e formulações de cálculo de estacas, blocos de coroamento e vigas de concreto armado — com hipóteses, normas e limites de validade.
+hero_botao: Começar
+hero_botao2: Conhecer os produtos
 ---
 
-# Documentação EnCteX
-
-Manuais de uso e formulações de cálculo dos programas de fundações da EnCteX.
+# Documentação EnCteX { .ex-oculto }
 
 Cada produto tem duas camadas de documentação, e elas respondem a perguntas
 diferentes:

@@ -48,8 +48,8 @@ de escolher:
 
 | Programa | Nome completo | Versão | Acrescenta |
 | :-- | :-- | :-- | :-- |
-| PCO | Pile Cap One | 1.0.1 | Blocos rígidos por bielas e tirantes |
-| PCX | Pile Cap X | 1.0.1 | Blocos flexíveis, calculados como viga bi-apoiada ou engastada |
+| PCO | Pile Cap One | 1.0.2 | Blocos rígidos por bielas e tirantes |
+| PCX | Pile Cap X | 1.0.2 | Blocos flexíveis, calculados como viga bi-apoiada ou engastada |
 
 **Linha SB — Simple Beam: vigas (gratuitos)**
 

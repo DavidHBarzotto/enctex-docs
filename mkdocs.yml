@@ -12,6 +12,9 @@ extra:
     - icon: material/web
       link: https://enctex.com.br
       name: enctex.com.br
+    - icon: fontawesome/brands/whatsapp
+      link: https://wa.me/5545999716262
+      name: WhatsApp (45) 99971-6262
   generator: false
   # O botao do cabecalho, no estilo do site. Ver overrides/partials/header.html.
   site_cta:
@@ -25,7 +28,7 @@ theme:
   favicon: assets/favicon.png
   logo: assets/logo.png
   font:
-    # As mesmas do enctex.com.br: Space Grotesk nos títulos, Inter no corpo.
+    # As mesmas do enctex.com.br: Inter em tudo, JetBrains Mono no código.
     text: Inter
     code: JetBrains Mono
   features:
@@ -44,9 +47,9 @@ theme:
     - content.code.copy
     - content.tooltips
   palette:
-    # Escuro e ponto. O site institucional e escuro, e oferecer alternancia
-    # aqui faria a documentacao ser a unica peca da marca com dois rostos.
-    scheme: slate
+    # Claro e ponto, como o site institucional (redesenho de out/2026). Oferecer
+    # alternancia aqui faria a documentacao ser a unica peca da marca com dois rostos.
+    scheme: default
     primary: custom
     accent: custom
 
@@ -148,7 +151,6 @@ plugins:
             Momento-curvatura: Moment-curvature
             Otimização da seção: Section optimisation
             Blévot & Frémy: Blévot & Frémy
-            Fórmulas por arranjo: Fórmulas por disposición
             Fórmulas por arranjo: Formulas by arrangement
             MBT (Bielas e Tirantes): STM (Strut and Tie)
             Elementos finitos: Finite elements
@@ -184,11 +186,16 @@ plugins:
             O que muda no SPO: Qué cambia en SPO
             Recursos de IA: Funciones de IA
             Blévot & Frémy: Blévot & Frémy
+            Fórmulas por arranjo: Fórmulas por disposición
             MBT (Bielas e Tirantes): MBT (Bielas y Tirantes)
             Elementos finitos: Elementos finitos
             Combinação de ações: Combinación de acciones
             Verificações: Comprobaciones
             Blocos flexíveis: Encepados flexibles
+            Flexão simples: Flexión simple
+            Cortante e torção: Cortante y torsión
+            Momento-curvatura: Momento-curvatura
+            Otimização da seção: Optimización de la sección
 
 nav:
   - Início: index.md

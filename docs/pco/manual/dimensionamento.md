@@ -50,10 +50,10 @@ do tempo devida a cargas permanentes — o efeito Rüsch**. Ele entra no limite 
 tensão das bielas:
 
 \[
-\sigma_{cd,b,lim} = lpha_{lim}\,K_R\,f_{cd}
+\sigma_{cd,b,lim} = \alpha_{lim}\,K_R\,f_{cd}
 \]
 
-com \(lpha_{lim}\) igual a 1,4, 1,75 ou 2,1 conforme o bloco tenha duas,
+com \(\alpha_{lim}\) igual a 1,4, 1,75 ou 2,1 conforme o bloco tenha duas,
 três, ou quatro e mais estacas.
 
 !!! info "Ele não mexe na armadura"

@@ -1,0 +1,35 @@
+{#-
+  Página inicial da documentação, com o mesmo topo do enctex.com.br: título
+  grande, texto de apoio, dois botões e o desenho técnico da ponte estaiada
+  (que se traça sozinho ao carregar).
+
+  Os textos vêm do front matter da página (`hero_titulo`, `hero_texto`,
+  `hero_botao`, `hero_botao2`), para que cada idioma escreva os seus:
+    docs/index.md     -> português
+    docs/index.en.md  -> inglês
+    docs/index.es.md  -> espanhol
+
+  O SVG é gerado a partir do componente do site (PonteEstaiada.tsx), para os
+  dois desenhos serem sempre o mesmo.
+
+  O link de "Começar" é relativo de propósito: a inicial está na raiz de cada
+  idioma (/, /en/, /es/), então "comecar/" leva à página no MESMO idioma.
+-#}
+{% extends "main.html" %}
+
+{% block hero %}
+  <section class="ex-hero">
+    <div class="ex-hero__desenho" aria-hidden="true">
+      {% include "partials/ponte-estaiada.svg" %}
+    </div>
+    <div class="ex-hero__veu"></div>
+    <div class="ex-hero__conteudo md-grid">
+      <p class="ex-hero__titulo">{{ page.meta.hero_titulo }}</p>
+      <p class="ex-hero__texto">{{ page.meta.hero_texto }}</p>
+      <div class="ex-hero__botoes">
+        <a class="ex-botao ex-botao--primario" href="comecar/">{{ page.meta.hero_botao }} →</a>
+        <a class="ex-botao" href="https://enctex.com.br/produtos" rel="noopener">{{ page.meta.hero_botao2 }}</a>
+      </div>
+    </div>
+  </section>
+{% endblock %}
